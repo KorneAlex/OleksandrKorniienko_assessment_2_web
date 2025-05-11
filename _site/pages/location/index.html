@@ -44,7 +44,7 @@
 </style>
 
 <head>
-  <title>{{ title }}</title>
+  <title>(Whether) Weather</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/scripts/dark.js"></script>
@@ -54,11 +54,40 @@
 </head>
 
 <body class="container is-widescreen is-fullheight">
-  {% include "header.njk"%}
+  <nav class="navbar" role="navigation" aria-label="main navigation" style="padding: 20px;">
+        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
+    <div class="navbar-menu is-align-items-flex-end is-justify-content-end">
+        <div class="navbar-item box" id="dashboard"><a href="/pages/dashboard/?menu=dashboard&favorites=true">My dashboard</a></div>
+        <div class="navbar-item box" id="location"><a href="/pages/location/?menu=location">Location</a></div>
+        
+        <div class="navbar-item box dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger" id="all_cities">
+            <a href="/pages/all_cities/?menu=all_cities"><span>Cities list</span></a>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content" id="cities_list"></div>
+            </div>
+        </div>
+        
+        <div class="navbar-item box" id="about"><a href="/pages/about/?menu=about">About</a></div>
+        
+        <div class="navbar-item box" id="test"><a href="/pages/test/?menu=test">Test</a></div>
+     
+            <button class="navbar-item box" id="colorMode">
+                <i class="fa-regular fa-heart" id="colorModeIndicator"></i>
+                <p>Dark mode</p]>
+                </button>
+    </div>
+</nav>
 
-  {{ content | safe }}
+  
 
-  {% include "footer.njk"%}
+  <footer class="footer box">
+    <section class="content has-text-centered">
+      <p>
+        Web assessment 2 by The bulma hater<strong> Oleksandr Korniienko</strong> (W20114792)<br/>
+        <a href="https://www.setu.ie/">SETU</a> <a href="https://tinyurl.com/yc5u6rnn">2025</a>
+      </p>
+    </section>
+  </footer>
   <script type="module" src="/scripts/script.js"></script>
 </body>
 </html>

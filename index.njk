@@ -2,11 +2,13 @@
 layout: layout.njk
 title: (Whether) Weather
 ---
-<div class="box has-text-centered has-text-weight-bold" style="padding: 15px;"><p>The weather in&nbsp<span id="currentCityName"></span></p></div>
-<div class="box is-flex is-flex-direction-row">
+<section class="box">
+  <div class="title has-text-centered"><h1>The weather in&nbsp<span id="currentCityName"></span></h1>
+  </section>
 
+<section class="box is-flex is-flex-direction-row">
 {# now #}
-<div class="column">
+<article class="column">
   <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Now:&nbsp</h1><span id="currentTime">time</span></div>
   <div class="is-flex is-flex-direction-row" style="gap: 25px">
     <div><img
@@ -15,7 +17,6 @@ title: (Whether) Weather
       class="image is-128x128 is-offset-one-fifth"
       style="margin-left: 20px">
   </div>
-  {# <span id="hourly_weather_code">weather code</span> #}
     <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span></div>
     <div style="align-self: flex-end; flex-grow: 1">
       <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
@@ -25,9 +26,9 @@ title: (Whether) Weather
       <p>Precipitation:&nbsp<span id="hourly_precipitation">XXm/s</span></p>
     </div>
   </div>
-</div>
+</article>
   {# today #}
-  <div class="column">
+  <article class="column">
     <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Today is&nbsp<span id="weekday0"></span>&nbsp<span id="date0">date</span></p></div>
     <div
       class="is-flex is-flex-direction-row"
@@ -40,14 +41,12 @@ title: (Whether) Weather
           class="image is-128x128 is-offset-one-fifth"
           style="margin-left: 20px">
       </div>
-      {# <span id="daily_weather_code">weather code</span> #}
-
       <div class="is-flex-direction-column">
         <div>
           <span class="title has-text-weight-bold" id="daily_temperature_2m_max">XX°C</span></div>
           <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span></div>
-      </div>
-{# <div class="is-flex-grow-5"></div> #}
+        </div>
+
       <div style="margin-right: 20px;">
         <p>Feels like:&nbsp<span id="daily_apparent_temperature_min">XX°C</span>&nbspto&nbsp<span id="daily_apparent_temperature_max">XX°C</span></p>
         <p>Sunrise:&nbsp<span id="daily_sunrise">time</span></p>
@@ -64,12 +63,10 @@ title: (Whether) Weather
             </figure></div>
       </div>
     </div>
-  </div>
-</div>
+  </article>
+</section>
   {# week #}
-  <div class="box">
+  <section class="box">
   <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>The weather forecast for the next 6 days<span id="g"></span>&nbsp:</p></div>
-
   <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days"></div>
-      </div>
-</div>
+  </section>

@@ -1,5 +1,5 @@
-import {hoursToTwoChars, minToTwoChars, weather_code_to_icon, get_focus_city} from "./utils.js";
-import { next6days, citiesListDropdown, getCitiesList, createCityTile} from "./builder.js";       
+import {hoursToTwoChars, minToTwoChars, weatherCodeToIcon, getFocusCity} from "./utils.js";
+import {next6days, citiesListDropdown, getCitiesList, createCityTile} from "./builder.js";       
 document.addEventListener("DOMContentLoaded", () => {
 
 
@@ -13,16 +13,23 @@ const tilesContainer = document.getElementById("cities_tiles");
 const citiesList = getCitiesList();
 const urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get("favorites")) {
-    const favCities = Object.keys(localStorage).filter(key => localStorage.getItem(key) === "true");
+    const favCities = Object.keys(localStorage).filter(key => localStorage.getItem(key) === "true" && citiesList.includes(key));
     try {tilesContainer.innerHTML = favCities.map(city => createCityTile(city)).join("");} catch (e) {console.log("fav cities_tiles error")}
 } else {
 try {tilesContainer.innerHTML = citiesList.map(city => createCityTile(city)).join("");}
 catch (e) {console.log("cities_tiles error")}
 }
 
+// active menu
+const activeMenu = urlParams.get("menu");
+const menuItem = document.getElementById(activeMenu);
+console.log("menu item: " + menuItem);
+try{ menuItem.style.backgroundColor = "#ffb901";} catch (e) {console.log("menu item error")}
+
+
 // dropdown list
-const cities_list2 = document.getElementById("cities_list");
-try {cities_list2.innerHTML = citiesList.map(city => citiesListDropdown(city)).join(""); } catch (e) {console.log("cities_list error")};
+const cities_list_dropdown = document.getElementById("cities_list");
+try {cities_list_dropdown.innerHTML = citiesList.map(city => citiesListDropdown(city)).join(""); } catch (e) {console.log("cities_list error")};
 
 // next 6 days forecast
 const next6days2 = document.getElementById("next6days");
@@ -31,7 +38,7 @@ try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days erro
 //=============================================================================
     const userLocation = "waterford";
     let currentCity = "";
-    try {currentCity = get_focus_city();} catch (e) {console.log("ERROR get_focus_city")}
+    try {currentCity = getFocusCity();} catch (e) {console.log("ERROR getFocusCity")}
         if (currentCity === null) {
         currentCity = userLocation;
     }
@@ -105,17 +112,17 @@ try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days erro
 
     //============================weather_img=======================================
     const weather_now = document.getElementById("weather_now_png");
-    try {weather_now.src = "/img/" + weather_code_to_icon(currentCityDataHourly.hourly.weather_code[indexHourly]);} catch (e) {console.log("ERROR weather_now")}
+    try {weather_now.src = "/img/" + weatherCodeToIcon(currentCityDataHourly.hourly.weather_code[indexHourly]);} catch (e) {console.log("ERROR weather_now")}
 
     const weather_today = document.getElementById("weather_today_png");
-    try {weather_today.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily]);} catch (e) {console.log("ERROR weather_today")}
+    try {weather_today.src = "/img/" + weatherCodeToIcon(currentCityData.daily.weather_code[indexDaily]);} catch (e) {console.log("ERROR weather_today")}
 
 
     //=============================week cards========================================
 
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    const weekdday_today = () => {
+    const weekdayToday = () => {
         for (let i = 0; i < 7; i++) {
             const weekday = document.getElementById(`weekday${i}`);
             const day = new Date();
@@ -126,7 +133,7 @@ try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days erro
     
     //https://stackoverflow.com/questions/23081158/javascript-get-date-of-the-next-day
 
-    const date_today = () => {
+    const dateToday = () => {
         for (let i = 0; i < 7; i++) {
         const date = document.getElementById(`date${i}`);
         const day = new Date();
@@ -138,14 +145,14 @@ try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days erro
     //==========================next6days==============================================
 
 
-    const weather_for_week = () => {
+    const weatherForWeek = () => {
         for (let i = 1; i < 7; i++) {
             const weather_today = document.getElementById(`weather_today+${i}_png`);
-            try { weather_today.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+i]);} catch (e) {console.log(`ERROR weather_today+${i}`)}
+            try { weather_today.src = "/img/" + weatherCodeToIcon(currentCityData.daily.weather_code[indexDaily+i]);} catch (e) {console.log(`ERROR weather_today+${i}`)}
         }
     }
 
-    const wind_for_week = () => {
+    const windForWeek = () => {
         for (let i = 0; i < 7; i++) {
             const wind_today = document.getElementById(`wind_today+${i}_png`);
             try { wind_today.style = `rotate: -${currentCityData.daily.wind_direction_10m_dominant[indexDaily+i]}deg;`;} catch (e) {console.log(`ERROR wind_today+${i}`)}
@@ -153,7 +160,7 @@ try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days erro
     }
 
 // temp min max
-    const daily_temperature_today = () => {
+    const dailyTemperatureToday = () => {
         for (let i = 1; i < 7; i++) {
             const daily_temperature_2m_max_today = document.getElementById(`daily_temperature_2m_max_today+${i}`);
             const daily_temperature_2m_min_today = document.getElementById(`daily_temperature_2m_min_today+${i}`);
@@ -173,45 +180,29 @@ try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days erro
     
 
 
-    weekdday_today();
-    date_today();
-    wind_for_week();
-    weather_for_week();
-    daily_temperature_today();
+    weekdayToday();
+    dateToday();
+    windForWeek();
+    weatherForWeek();
+    dailyTemperatureToday();
     cityNameConverter();
 
     // daily_temperature_2m_max_today+${i}
 console.log("INDEX SCRIPT END <==========================================================="); // <<<<<===============================================
 
 
-//===========================colorMode===========================================
-
-document.querySelectorAll("[id^=colorMode-]").forEach(checkbox => {
-    checkbox.addEventListener('click', (event)=> {
-            const colorMode = "Dark Mode";
-            const isDark = event.target.checked;
-            localStorage.setItem(colorMode, isDark);
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        })
-        const colorMode = "Dark Mode";
-        const isDark = localStorage.getItem(colorMode) === 'true';
-        checkbox.checked = isDark;
-        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    });
-    
 //===========================favorites===========================================
-document.querySelectorAll("[id^=fave-]").forEach(checkbox => {
-    checkbox.addEventListener('click', (event)=> {
+
+document.querySelectorAll("[id^=fave-]").forEach(heart => {
+    heart.addEventListener('click', (event)=> {
         const city = event.target.id.slice(5);
-        const isFav = event.target.checked; 
-        localStorage.setItem(city, isFav); 
-        console.log("City: " + city + ", Favorite: " + isFav); 
+        const isFav = localStorage.getItem(city) === 'true';
+        localStorage.setItem(city, !isFav); 
+        heart.classList = !isFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
     })
-    const city = checkbox.id.slice(5); 
-    const isFav = localStorage.getItem(city) === 'true'; 
-    checkbox.checked = isFav; 
-    console.log("City: " + city + ", Favorite: " + isFav); 
-
-
-    })
+    const city = heart.id.slice(5); 
+    const isAlreadyFav = localStorage.getItem(city) === 'true';
+    heart.classList = isAlreadyFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
 });
+
+})

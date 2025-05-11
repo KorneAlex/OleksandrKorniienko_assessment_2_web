@@ -1,4 +1,4 @@
-import { weather_code_to_icon } from "./utils.js";
+import { weatherCodeToIcon } from "./utils.js";
 
 export function next6days() {
   let code = "";
@@ -69,14 +69,20 @@ export function citiesListDropdown(city) {
         const temperature_now = currentCityDataHourly.hourly.temperature_2m[0];
         const wind_direction = currentCityData.daily.wind_direction_10m_dominant[0];
         const weather_now = currentCityDataHourly.hourly.weather_code[0];
-        console.log(weather_code_to_icon(weather_now));
-        const weather_now_png = `/img/${weather_code_to_icon(weather_now)}`;
+        console.log(weatherCodeToIcon(weather_now));
+        const weather_now_png = `/img/${weatherCodeToIcon(weather_now)}`;
         code += `
         <figure class="card image is-4by5" style="width: 15%; height: 100%; margin: 0">
+
+        <button class="card-header-icon" id="heart">
+            <i id="fave-${city}" class="fa-regular fa-heart"></i>
+        </button>
+      
         <a href="/?focus_city=${city}" style="display: block;">
+     
           <div class="has-text-centered" style="padding: 10px;"><p id="${city}_city">city</p></div>
+      
           <div class="is-flex is-justify-content-center">
-          
           <figure class="image is-96x96">
           <img
             src="${weather_now_png}"
@@ -102,7 +108,7 @@ export function citiesListDropdown(city) {
           
           </div>
           </a>
-          <input type="checkbox" id="fave-${city}" class="checkbox"/>
+          
     
         </figure>
     

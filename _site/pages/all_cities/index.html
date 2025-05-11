@@ -2,79 +2,97 @@
 
 
 <html lang="en" data-theme=light>
-  <style>
-    :root a{
-      color: inherit;
-      text-decoration: none;
-      /* & :hover{
-          text-shadow: 0 0 25px #000;
+<!--
+  Hi there! this style block is used to fix issues caused by the bulma.
+  I could have not used it, but I wanted my site to be not only functional but also comfortable to use.
+  I hope you can see that.
+  I am not a professional web developer, so I am not sure if this is the best way to do it.
+  I am open to suggestions.
+  For example [id^=fave-] (which I learned from the lections) is used to expand the clicable area of the heart icon. For the better User experience.
 
-    } */
+   #syno-notification-is-installed 
+   is used it to hide the notification icon in the bottom of the screen. 
+   It didn't work btw. But I had the same issue in the previous version assessment and it worked. I'm blaming the bulma for that:D
+
+   Yes, there are some style injections in the different div's and sections but again everything for the better look and user experience.
+  -->
+<style>
+  :root a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .navbar-item {
+    margin: 1.5rem;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+  }
+
+  #heart{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0px;
     }
-    </style>
+
+  [id^=fave-]{
+      padding: 13px;
+    }
+
+  #syno-notification-is-installed {
+    display: none;
+  }
+</style>
+
 <head>
   <title>(Whether) Weather</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-
-    <script src="/data/weather_data.js"></script>
-
-    <script src="https://kit.fontawesome.com/f59d84fb1c.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/scripts/dark.js"></script>
+  <script src="/data/weather_data.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <script src="https://kit.fontawesome.com/f59d84fb1c.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="container is-widescreen">  
-  <nav class="navbar" role="navigation" aria-label="main navigation" style="padding-bottom: 15px;">
-    <div class="navbar-brand">
+<body class="container is-widescreen is-fullheight">
+  <nav class="navbar" role="navigation" aria-label="main navigation" style="padding: 20px;">
         <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
-    </div>
-    <div class="navbar-menu is-align-items-flex-end">
-        <div class="navbar-item"><a href="/pages/dashboard/?favorites=true">My dashboard</a></div>
-        <div class="navbar-item">Location</div>
+    <div class="navbar-menu is-align-items-flex-end is-justify-content-end">
+        <div class="navbar-item box" id="dashboard"><a href="/pages/dashboard/?menu=dashboard&favorites=true">My dashboard</a></div>
+        <div class="navbar-item box" id="location"><a href="/pages/location/?menu=location">Location</a></div>
         
-        <div class="navbar-item dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger">
-            <a href="/pages/all_cities/"><span>Cities list</span></a>
+        <div class="navbar-item box dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger" id="all_cities">
+            <a href="/pages/all_cities/?menu=all_cities"><span>Cities list</span></a>
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
                 <div class="dropdown-content" id="cities_list"></div>
             </div>
         </div>
         
-        <div class="navbar-item">About</div>
+        <div class="navbar-item box" id="about"><a href="/pages/about/?menu=about">About</a></div>
         
-        <switch class="navbar-item">
-            <input type="checkbox" id="colorMode-light" class="switch is-rounded">
-            <label for="switch">Dark mode</label>
-        </switch>
-        <div class="navbar-item"><a href="/pages/test/">Test</a></div>
+        <div class="navbar-item box" id="test"><a href="/pages/test/?menu=test">Test</a></div>
+     
+            <button class="navbar-item box" id="colorMode">
+                <i class="fa-regular fa-heart" id="colorModeIndicator"></i>
+                <p>Dark mode</p]>
+                </button>
     </div>
 </nav>
 
-    <section class="container">
-  <article>
-
-    <div class="title has-text-centered">
-      <h1>All cities</h1>
-    </div>
-    <div class="subtitle title has-text-centered">
-      <h2>Favorites</h2>
-    </div>
-    <div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center" id="cities_tiles"
-      style="gap: 15px"></div>
-  </article>
+  <section class="box">
+    <div class="title has-text-centered"><h1>All cities</h1></div>
 </section>
+    <section class="box is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center" id="cities_tiles"
+      style="gap: 15px">
+    </section>
 
-<div id="weather-result"></div>
-
-  <footer><footer class="footer">
-    <div class="content has-text-centered">
+  <footer class="footer box">
+    <section class="content has-text-centered">
       <p>
         Web assessment 2 by The bulma hater<strong> Oleksandr Korniienko</strong> (W20114792)<br/>
-        <a href="https://www.setu.ie/">SETU</a> 2025
+        <a href="https://www.setu.ie/">SETU</a> <a href="https://tinyurl.com/yc5u6rnn">2025</a>
       </p>
-    </div>
-  </footer></footer>
+    </section>
+  </footer>
   <script type="module" src="/scripts/script.js"></script>
- 
 </body>
-<script src="/scripts/fav.js"></script>
 </html>

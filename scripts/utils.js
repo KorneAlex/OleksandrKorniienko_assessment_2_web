@@ -16,11 +16,9 @@ export function minToTwoChars(currentTimeMinutes) {
     }
 }
 
-// Convert weather code to icon file name
-// @param {number} weather_code - The weather code to convert.
-// @returns {string} The corresponding icon file name.
+//===========================weather=============================================
 // https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTML
-export function weather_code_to_icon(weather_code) {
+export function weatherCodeToIcon(weather_code) {
     if (weather_code === 0) return "sunny.png";
     else if (weather_code === 1) return "partly_cloudy.png";
     else if (weather_code === 2) return "cloudy.png";
@@ -39,14 +37,8 @@ export function weather_code_to_icon(weather_code) {
 
 //============================key_values=============================================
 
-export function get_focus_city () {
+export function getFocusCity() {
     const keyValues = window.location.search;
     const urlParams = new URLSearchParams(keyValues);
     return urlParams.get("focus_city");
 }
-
-// export function set_focus_city () {
-//     const keyValues = window.location.search;
-//     const urlParams = new URLSearchParams(keyValues);
-//     return urlParams.set("focus_city");
-// }
