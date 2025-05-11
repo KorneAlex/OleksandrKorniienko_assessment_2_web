@@ -2,8 +2,7 @@
 layout: layout.njk
 title: (Whether) Weather
 ---
-
-<section class="section is-flex is-flex-direction-row is-justify-content-center">
+{# <section class="section is-flex is-flex-direction-row is-justify-content-center">
     <div class="card is-flex is-flex-direction-column">
         <div class="card-header is-flex is-flex-direction-column">
             <div class="card-header-title is-flex is-flex-direction-column">All data daily</div>
@@ -25,7 +24,7 @@ title: (Whether) Weather
     </div>
     <div class="card is-flex is-flex-direction-column">
         <div class="card-header is-flex is-flex-direction-column">
-            <div class="card-header-title is-flex is-flex-direction-column">All data daily</div>
+            <div class="card-header-title is-flex is-flex-direction-column">All data hourly</div>
             <div class="card-content  is-flex is-flex-direction-column">
                 <span id="hourly_temperature_2m">sss</span>
                 <span id="hourly_relative_humidity_2m">sss</span>
@@ -38,10 +37,9 @@ title: (Whether) Weather
             </div>
         </div>
     </div>
-</section>
+</section> #}
 
-
-    <div class="columns">
+  <div class="columns">
         <div class="column card">
             <div class="card-header is-flex-direction-column">
                 <div class="card-header-title "><span id="cityName"></span></div>
@@ -62,6 +60,7 @@ title: (Whether) Weather
             <div class="card-header is-flex-direction-column">
                 <div class="card-header-title">max wind</div>
                 <div class="card-content"><span id="maxWind"></span></div>
+                <div class="card-content"><span id="maxWind"></span></div>
             </div>
         </div>
         <div class="column card">
@@ -74,4 +73,4 @@ title: (Whether) Weather
                 </div>
             </div>
         </div>
-    </div>
+    </div> 

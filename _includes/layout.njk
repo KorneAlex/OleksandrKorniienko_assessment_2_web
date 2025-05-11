@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+
+<html lang="en" data-theme=light>
 
 <head>
   <title>{{ title }}</title>
@@ -8,9 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <script src="/data/weather_data.js"></script>
     <script src="/scripts/script.js"></script>
+    {# <script src="/scripts/test.js"></script> #}
 </head>
 
-<body>
+<body class="container is-widescreen is-max-desktop">  
   {% include "header.njk"%}
   <div>
     {{ content | safe }}

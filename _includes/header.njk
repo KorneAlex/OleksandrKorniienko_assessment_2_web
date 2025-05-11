@@ -1,6 +1,14 @@
-    <header class="header container is-widescreen">
-        <nav class="navbar is-flex">
-            <div class="navbar-brand"><img src="/data/logo.png"></div>
-            <h1>HEADER</h1>
-        </nav>
-    </header>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <div class="navbar-brand"><a href="/pages/test/"><img src="/data/logo.png" width="180"></a></div>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-item">My dashboard</div>
+        <div class="navbar-item">Location</div>
+        <div class="navbar-item">About</div>
+        <switch class="navbar-item">
+            <input type="checkbox" id="switch" class="switch is-rounded" onclick="changeTheme()">
+            <label for="switch">Dark mode</label>
+        </switch>
+    </div>
+</nav>
