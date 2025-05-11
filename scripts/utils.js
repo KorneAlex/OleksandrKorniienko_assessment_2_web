@@ -35,3 +35,17 @@ export function weather_code_to_icon(weather_code) {
     else if (weather_code >= 80 && weather_code <= 99) return "thunderstorm.png";
     else return "error.png";
 }
+
+//============================key_values=============================================
+
+export function get_focus_city () {
+    const keyValues = window.location.search;
+    const urlParams = new URLSearchParams(keyValues);
+    return urlParams.get("focus_city");
+}
+
+// export function set_focus_city () {
+//     const keyValues = window.location.search;
+//     const urlParams = new URLSearchParams(keyValues);
+//     return urlParams.set("focus_city");
+// }

@@ -11,13 +11,21 @@
 </head>
 
 <body class="container is-widescreen">  
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation" style="padding-bottom: 15px;">
     <div class="navbar-brand">
-        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="180"></a></div>
+        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
     </div>
-    <div class="navbar-menu">
+    <div class="navbar-menu is-align-items-flex-end">
         <div class="navbar-item">My dashboard</div>
         <div class="navbar-item">Location</div>
+        
+        <div class="navbar-item dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger">
+            <span>City</span>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content" id="cities_list"></div>
+            </div>
+        </div>
+        
         <div class="navbar-item">About</div>
         <div class="navbar-item"><a href="/pages/test/">Test</a></div>
         <switch class="navbar-item">
@@ -27,21 +35,21 @@
     </div>
 </nav>
 
-    <div class="card-header-title is-centered has-text-weight-semibold"><p>The weather in&nbsp</p><span id="currentCityName"></span></div>
+    <div class="box has-text-centered has-text-weight-bold" style="padding: 15px;"><p>The weather in&nbsp<span id="currentCityName"></span></p></div>
 <div class="box is-flex is-flex-direction-row">
 
 
 <div class="column">
-  <div class="card-header-title is-centered"><p class="has-text-weight-bold">Now:&nbsp</h1><span id="currentTime">time</span></div>
-  <div class="is-flex is-flex-direction-row" style="gap: 15px">
+  <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Now:&nbsp</h1><span id="currentTime">time</span></div>
+  <div class="is-flex is-flex-direction-row" style="gap: 25px">
     <div><img
       id="weather_now_png"
       alt="weather_now"
-      class="image is-64x64 is-offset-one-fifth"
+      class="image is-128x128 is-offset-one-fifth"
       style="margin-left: 20px">
   </div>
   
-    <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">11°C</span></div>
+    <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span></div>
     <div style="align-self: flex-end; flex-grow: 1">
       <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
       <p>Wind:&nbsp<span id="hourly_wind_speed_10m">XXm/s</span></p>
@@ -53,24 +61,24 @@
 </div>
   
   <div class="column">
-    <div class="card-header-title is-centered"><p class="has-text-weight-bold">Today is&nbsp<span id="weekday0"></span>&nbsp<span id="date0">date</span></p></div>
+    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Today is&nbsp<span id="weekday0"></span>&nbsp<span id="date0">date</span></p></div>
     <div
       class="is-flex is-flex-direction-row"
-      style="gap: 15px"
+      style="gap: 25px"
     >
       <div>
         <img
           id="weather_today_png"
           alt="weather_today"
-          class="image is-64x64 is-offset-one-fifth"
+          class="image is-128x128 is-offset-one-fifth"
           style="margin-left: 20px">
       </div>
       
 
       <div class="is-flex-direction-column">
         <div>
-          <span class="title has-text-weight-bold" id="daily_temperature_2m_max">11°C</span></div>
-          <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">9°C</span></div>
+          <span class="title has-text-weight-bold" id="daily_temperature_2m_max">XX°C</span></div>
+          <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span></div>
       </div>
 
       <div style="margin-right: 20px;">
@@ -79,67 +87,38 @@
         <p>Sunset:&nbsp<span id="daily_sunset">time</span></p>
         <p>Wind:&nbsp<span id="daily_wind_speed_10m_max">XXm/s</span></p>
         <p>Gusts up to:&nbsp<span id="daily_wind_gusts_10m_max">XXm/s</span></p>
+        <div class="is-flex is-flex-direction-row">
         <p>Wind direction:&nbsp<span id="daily_wind_direction_10m_dominant">XXm/s</span></p>
+          <figure class="image is-16x16">
+            <img
+            src="/img/wind_unselected.svg"
+              id="wind_today+0_png"
+              alt="wind_today+0">
+            </figure></div>
       </div>
     </div>
   </div>
 </div>
   
   <div class="box">
-  <div><p>Next 7 days in&nbsp<span id="g">CHANGEIT</span>&nbsp:</p></div>
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>The weather forecast for the next 7 days<span id="g"></span>&nbsp:</p></div>
 
-  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days">
-      
-
-      
-
-      
-
-
-      </div>
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days"></div>
       </div>
 
 
   
-   <div class="column">
-<div class="columns is-flex " style="gap:25px">
 
-      <div class="column card is-one-fifth">
-        <div class="is-flex-direction-column">
-          <div class="card-header-title">1</div>
-          <div class="card-content">
-            <p>Temperature: <span id="currentTemp"></span></p>
-            <p>Feels like: : <span id="currentTempFeel"></span></p>
-            <p>Wind: <span id="currentWind"></span></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="column card is-one-fifth">
-        <div class="is-flex-direction-column">
-          <div class="card-header-title">2</div>
-          <div class="card-content">
-            <p>Temperature: <span id="currentTemp"></span></p>
-            <p>Feels like: : <span id="currentTempFeel"></span></p>
-            <p>Wind: <span id="currentWind"></span></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="column card is-one-fifth is-clickable">
-        <div class="is-flex-direction-column">
-          <div class="card-header-title">3</div>
-          <div class="card-content">
-            <p>Temperature: <span id="currentTemp"></span></p>
-            <p>Feels like: : <span id="currentTempFeel"></span></p>
-            <p>Wind: <span id="currentWind"></span></p>
-          </div>
-        </div>
-      </div>
-  </div></div>
 </div>
 
-  <div></div>
+  <div><footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        Web assessment 2 by The bulma hater<strong> Oleksandr Korniienko</strong> (W20114792)<br/>
+        <a href="https://www.setu.ie/">SETU</a> 2025
+      </p>
+    </div>
+  </footer></div>
   <script type="module" src="/scripts/index.js"></script>
 </body>
 </html>

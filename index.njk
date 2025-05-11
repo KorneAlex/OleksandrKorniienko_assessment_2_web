@@ -2,21 +2,21 @@
 layout: layout.njk
 title: (Whether) Weather
 ---
-<div class="card-header-title is-centered has-text-weight-semibold"><p>The weather in&nbsp</p><span id="currentCityName"></span></div>
+<div class="box has-text-centered has-text-weight-bold" style="padding: 15px;"><p>The weather in&nbsp<span id="currentCityName"></span></p></div>
 <div class="box is-flex is-flex-direction-row">
 
 {# now #}
 <div class="column">
-  <div class="card-header-title is-centered"><p class="has-text-weight-bold">Now:&nbsp</h1><span id="currentTime">time</span></div>
-  <div class="is-flex is-flex-direction-row" style="gap: 15px">
+  <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Now:&nbsp</h1><span id="currentTime">time</span></div>
+  <div class="is-flex is-flex-direction-row" style="gap: 25px">
     <div><img
       id="weather_now_png"
       alt="weather_now"
-      class="image is-64x64 is-offset-one-fifth"
+      class="image is-128x128 is-offset-one-fifth"
       style="margin-left: 20px">
   </div>
   {# <span id="hourly_weather_code">weather code</span> #}
-    <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">11°C</span></div>
+    <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span></div>
     <div style="align-self: flex-end; flex-grow: 1">
       <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
       <p>Wind:&nbsp<span id="hourly_wind_speed_10m">XXm/s</span></p>
@@ -28,24 +28,24 @@ title: (Whether) Weather
 </div>
   {# today #}
   <div class="column">
-    <div class="card-header-title is-centered"><p class="has-text-weight-bold">Today is&nbsp<span id="weekday0"></span>&nbsp<span id="date0">date</span></p></div>
+    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Today is&nbsp<span id="weekday0"></span>&nbsp<span id="date0">date</span></p></div>
     <div
       class="is-flex is-flex-direction-row"
-      style="gap: 15px"
+      style="gap: 25px"
     >
       <div>
         <img
           id="weather_today_png"
           alt="weather_today"
-          class="image is-64x64 is-offset-one-fifth"
+          class="image is-128x128 is-offset-one-fifth"
           style="margin-left: 20px">
       </div>
       {# <span id="daily_weather_code">weather code</span> #}
 
       <div class="is-flex-direction-column">
         <div>
-          <span class="title has-text-weight-bold" id="daily_temperature_2m_max">11°C</span></div>
-          <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">9°C</span></div>
+          <span class="title has-text-weight-bold" id="daily_temperature_2m_max">XX°C</span></div>
+          <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span></div>
       </div>
 {# <div class="is-flex-grow-5"></div> #}
       <div style="margin-right: 20px;">
@@ -54,58 +54,26 @@ title: (Whether) Weather
         <p>Sunset:&nbsp<span id="daily_sunset">time</span></p>
         <p>Wind:&nbsp<span id="daily_wind_speed_10m_max">XXm/s</span></p>
         <p>Gusts up to:&nbsp<span id="daily_wind_gusts_10m_max">XXm/s</span></p>
+        <div class="is-flex is-flex-direction-row">
         <p>Wind direction:&nbsp<span id="daily_wind_direction_10m_dominant">XXm/s</span></p>
+          <figure class="image is-16x16">
+            <img
+            src="/img/wind_unselected.svg"
+              id="wind_today+0_png"
+              alt="wind_today+0">
+            </figure></div>
       </div>
     </div>
   </div>
 </div>
   {# week #}
   <div class="box">
-  <div><p>Next 7 days in&nbsp<span id="g">CHANGEIT</span>&nbsp:</p></div>
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>The weather forecast for the next 7 days<span id="g"></span>&nbsp:</p></div>
 
-  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days">
-      
-
-      {# WEEK CARDS #}
-
-      {# <figure class="card image is-4by5" style="width: 15%; height: 100%;">
-        <div class=""><p id="date1">sun</p></div>
-        <div class="card-content">
-        <figure class="image is-96x96">
-          <img src="/img/cloudy.png" alt="test" >
-        </figure>
-        </div>
-      </figure>
-
-
-
-
-
-
-
-
-
-        <div class="card image is-4by5" style="width: 15%; height: 100%;">
-          <div class="card-content" id="date2">sun</div>
-        </div>
-        <div class="card image is-4by5" style="width: 15%; height: 100%;">
-          <div class="card-content" id="date3">mon</div>
-        </div>
-        <div class="card image is-4by5" style="width: 15%; height: 100%;">
-          <div class="card-content" id="date4">tue</div>
-        </div>
-        <div class="card image is-4by5" style="width: 15%; height: 100%;">
-          <div class="card-content" id="date5">wed</div>
-        </div>
-        <div class="card image is-4by5" style="width: 15%; height: 100%;">
-          <div class="card-content" id="date6">thu</div>
-        </div> #}
-
-
-      </div>
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days"></div>
       </div>
 
 
   
-  {# other cities #} {% include "otherCities.njk"%}
+{# {% include "otherCities.njk"%}  #}
 </div>

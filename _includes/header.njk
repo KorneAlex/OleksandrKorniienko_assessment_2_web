@@ -1,10 +1,18 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar" role="navigation" aria-label="main navigation" style="padding-bottom: 15px;">
     <div class="navbar-brand">
-        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="180"></a></div>
+        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
     </div>
-    <div class="navbar-menu">
+    <div class="navbar-menu is-align-items-flex-end">
         <div class="navbar-item">My dashboard</div>
         <div class="navbar-item">Location</div>
+        {# //============================================================= #}
+        <div class="navbar-item dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger">
+            <span>City</span>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content" id="cities_list"></div>
+            </div>
+        </div>
+        {# //============================================================= #}
         <div class="navbar-item">About</div>
         <div class="navbar-item"><a href="/pages/test/">Test</a></div>
         <switch class="navbar-item">
