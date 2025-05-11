@@ -2,75 +2,88 @@
 layout: layout.njk
 title: (Whether) Weather
 ---
-{# <section class="section is-flex is-flex-direction-row is-justify-content-center">
-    <div class="card is-flex is-flex-direction-column">
-        <div class="card-header is-flex is-flex-direction-column">
-            <div class="card-header-title is-flex is-flex-direction-column">All data daily</div>
-            <div class="card-content  is-flex is-flex-direction-column">
-                <span id="daily_weather_code">sss</span>
-                <span id="daily_temperature_2m_max">sss</span>
-                <span id="daily_temperature_2m_min"></span>
-                <span id="daily_apparent_temperature_max"></span>
-                <span id="daily_apparent_temperature_min"></span>
-                <span id="daily_sunrise"></span>
-                <span id="daily_sunset"></span>
-                <span id="daily_precipitation_hours"></span>
-                <span id="daily_precipitation_probability_max"></span>
-                <span id="daily_wind_speed_10m_max"></span>
-                <span id="daily_wind_gusts_10m_max"></span>
-                <span id="daily_wind_direction_10m_dominant"></span>
-            </div>
-        </div>
+<div class="box is-flex is-flex-direction-row">
+{# now #}
+<div class="column">
+  <div class="card-header-title"><p>The weather in&nbsp</p><span id="currentCityName"></span><p>&nbspnow:</p></div>
+  <div class="is-flex is-flex-direction-row is-align-items-center" style="gap: 15px">
+    <div><img src="/img/cloudy.png" alt="weather_today" class="image is-64x64 is-offset-one-fifth" style="margin-left: 20px"></div>
+    <div><span class="title has-text-weight-bold">11°C</span><span id="currentTime"></span></div>
+    <div style="align-self: flex-end; flex-grow: 1">
+      <p>Feels like: XX-XX <span id="currentTime"></span></p>
+      <p>Wind: XXm/s <span id="currentTime"></span></p>
     </div>
-    <div class="card is-flex is-flex-direction-column">
-        <div class="card-header is-flex is-flex-direction-column">
-            <div class="card-header-title is-flex is-flex-direction-column">All data hourly</div>
-            <div class="card-content  is-flex is-flex-direction-column">
-                <span id="hourly_temperature_2m">sss</span>
-                <span id="hourly_relative_humidity_2m">sss</span>
-                <span id="hourly_apparent_temperature"></span>
-                <span id="hourly_precipitation_probability"></span>
-                <span id="hourly_precipitation"></span>
-                <span id="hourly_weather_code"></span>
-                <span id="hourly_wind_speed_10m"></span>
-                <span id="hourly_wind_gusts_10m"></span>
-            </div>
-        </div>
-    </div>
-</section> #}
+  </div>
+</div>
+  {# today #}
+  <div class="column">
+    <div class="card-header-title"><p>Today's info&nbsp</p></div>
+    <div
+      class="is-flex is-flex-direction-row is-align-items-center"
+      style="gap: 15px"
+    >
+      <div>
+        <img
+          src="/img/clear.png"
+          alt="weather_today"
+          class="image is-64x64 is-offset-one-fifth"
+          style="margin-left: 20px"
+        />
+      </div>
 
-  <div class="columns">
-        <div class="column card">
-            <div class="card-header is-flex-direction-column">
-                <div class="card-header-title "><span id="cityName"></span></div>
-                <div class="card-content"><span id="day"></span>
-                    <p>Current time is: <span id="currentTime"></span></p>
-                </div>
-            </div>
+      <div class="is-flex-direction-column">
+        <div>
+          <span class="title has-text-weight-bold">11°C</span></div>
+          <div style="justify-self: end;"><span class="has-text-weight-bold">9°C</span></div>
+      </div>
+<div class="is-flex-grow-5"></div>
+      <div style="margin-right: 20px;">
+        <p>Feels like: XX-XX <span id="currentTime"></span></p>
+        <p>Wind: XXm/s <span id="currentTime"></span></p>
+        <p>Gusts up to: XXm/s <span id="currentTime"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+  {# week #}
+  <div class="box is-full">
+    <div class="is-flex-direction-column">
+      <div class="card-header-title">
+        Next 7 days in&nbspCHANGEIT<span id="currentCityName"></span>
+        <p>&nbsp:</p>
+      </div>
+
+      <div
+        class="card-content is-flex is-flex-direction-row is-justify-content-space-between"
+      >
+        <div style="justify-items: center">
+          <div class="card image is-3by4" style="height: 14rem">
+            <div class="card-content">today</div>
+          </div>
+          <p>02/05/2025</p>
         </div>
-        <div class="column card">
-            <div class="card-header is-flex-direction-column">
-                <div class="card-header-title">Temperature</div>
-                <div class="card-content">
-                    <p>max: <span id="maxTemp"></span> min: <span id="minTemp"></span></p>
-                </div>
-            </div>
+
+        <div class="card image is-3by4" style="height: 14rem">
+          <div class="card-content">sat</div>
         </div>
-        <div class="column card">
-            <div class="card-header is-flex-direction-column">
-                <div class="card-header-title">max wind</div>
-                <div class="card-content"><span id="maxWind"></span></div>
-                <div class="card-content"><span id="maxWind"></span></div>
-            </div>
+        <div class="card image is-3by4" style="height: 14rem">
+          <div class="card-content">sun</div>
         </div>
-        <div class="column card">
-            <div class="card-header is-flex-direction-column">
-                <div class="card-header-title">NOW</div>
-                <div class="card-content">
-                    <p>Temperature: <span id="currentTemp"></span></p>
-                    <p>Feels like: : <span id="currentTempFeel"></span></p>
-                    <p>Wind: <span id="currentWind"></span></p>
-                </div>
-            </div>
+        <div class="card image is-3by4" style="height: 14rem">
+          <div class="card-content">mon</div>
         </div>
-    </div> 
+        <div class="card image is-3by4" style="height: 14rem">
+          <div class="card-content">tue</div>
+        </div>
+        <div class="card image is-3by4" style="height: 14rem">
+          <div class="card-content">wed</div>
+        </div>
+        <div class="card image is-3by4" style="height: 14rem">
+          <div class="card-content">thu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {# other cities #} {% include "otherCities.njk"%}
+</div>
+<script src="/scripts/index.js"></script>

@@ -12,11 +12,11 @@
     {# <script src="/scripts/test.js"></script> #}
 </head>
 
-<body class="container is-widescreen is-max-desktop">  
+<body class="container is-widescreen">  
   {% include "header.njk"%}
-  <div>
+
     {{ content | safe }}
-  </div>
+
   <div>{% include "footer.njk"%}</div>
 </body>
 
