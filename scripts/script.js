@@ -189,6 +189,12 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("ERROR next7day
             try {daily_temperature_2m_min_forWeek.innerHTML = currentCityData.daily.temperature_2m_min[indexDaily7D+i] + currentCityData.daily_units.temperature_2m_min;} catch (e) {console.log(`ERROR daily_temperature_2m_min_today+${i}`)}
         }
     }
+    const dailyPrecipitationProbabilityForWeek = () => {
+        for (let i = 0; i < 7; i++) {
+            const precipitation_probability_max_forWeek = document.getElementById(`precipitation_probability_max_forWeek+${i}`);
+            try {precipitation_probability_max_forWeek.innerHTML = currentCityData.daily.precipitation_probability_max[indexDaily7D+i] + currentCityData.daily_units.precipitation_probability_max;} catch (e) {console.log(`ERROR precipitation_probability_max_forWeek+${i}`)}
+        }
+    }
 
 // dashboard
     const cityNameConverter = () => {
@@ -207,7 +213,8 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("ERROR next7day
     weatherForWeek();
     dailyTemperatureForWeek();
     cityNameConverter();
-    // getLocation();
+    dailyPrecipitationProbabilityForWeek();
+    getLocation();
     
     
     //===========================favorites===========================================

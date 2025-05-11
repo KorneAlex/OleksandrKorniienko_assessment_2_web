@@ -14,7 +14,7 @@ export function next7days() {
   for (let i = 0; i < 7; i++) {
     const daySelector = (i===0) ? "day=today":"day=today+"+i;
     code += `
-    <figure class="card image" style="width: 12%; height: 100%; ${(daySelector.slice(10) === getDayKeyValue().slice(6)) ? "border: solid;":"border: none;"}">
+    <figure class="column image" style="width: 12%; height: 100%; ${(daySelector.slice(10) === getDayKeyValue().slice(6)) ? "border: solid;":"border: none;"}">
     <a href="?focus_city=${getFocusCity()}&${daySelector}">
         <div class="has-text-centered" style="padding-top: 5px;"><p class="weekday${i}">weekday</p></div>
         <div class="has-text-centered" style="padding-top: 0px;"><p class="date${i}">date</p></div>
@@ -41,6 +41,7 @@ export function next7days() {
           style="rotate: -0deg;"
         </figure>
         </div>
+        <div><p>Rain:&nbsp<span class="has-text-weight-bold" id="precipitation_probability_max_forWeek+${i}">%</span></p></div>
 
         </div>
         
