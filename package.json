@@ -155,7 +155,6 @@
     "wrap-ansi-cjs": "^7.0.0",
     "ws": "^8.18.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
