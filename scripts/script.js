@@ -4,7 +4,7 @@
 //     const title = document.getElementById("title");
 //     // try {title.innerHTML = currentCity + " weather forecast";} catch (e) {console.log("ERROR title")} //ERROR
 //     const currentCityData = weatherData[currentCity + "_daily"] // amsterdam_daily
-//     const currentCityDataHourly = weatherData[currentCity + "_hourly"] // amsterdam_daily
+    // const currentCityDataHourly = weatherData[currentCity + "_hourly"] // amsterdam_daily
 //     const day = document.getElementById("day");               // <span id="day">Today</span>
 //     // const cityName = document.getElementById("cityName");       // TODO: make a script to have all city names correct
 //     // const indexForHourly = currentCityDataHourly.hourly.day.findIndex((element) => element === "TodayT" + hoursToTwoChars() + ":" + "00");
