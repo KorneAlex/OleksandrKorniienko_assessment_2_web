@@ -42,3 +42,11 @@ export function getFocusCity() {
     const urlParams = new URLSearchParams(keyValues);
     return urlParams.get("focus_city");
 }
+
+// hourly breakdown
+// export function getHourlyData(city) {
+//     const hourlyData = weatherData[city + "_hourly"];
+//     const hourly2 =  hourlyData.hourly.time[0];
+
+//     return("HourlyData from utils: ." + hourly2);
+// }

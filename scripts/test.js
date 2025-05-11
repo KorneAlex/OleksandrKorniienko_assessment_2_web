@@ -1,4 +1,28 @@
-console.log("POINTER FOR THE ERROR <======================="); // <<<<<===============================================
 
-const colorMode = document.body.classList.contains('light') ? 'light' : 'dark';
-const state = document.querySelector("#switch").checked ? "dark" : "light";
+document.addEventListener("DOMContentLoaded", () => {
+
+
+console.log("=================================TEST================================================")
+
+let x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function success(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+function error() {
+  alert("Sorry, no position available.");
+}
+console.log("=================================TEST================================================")
+
+
+});

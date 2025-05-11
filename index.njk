@@ -29,7 +29,7 @@ title: (Whether) Weather
 </article>
   {# today #}
   <article class="column">
-    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Today is&nbsp<span id="weekday0"></span>&nbsp<span id="date0">date</span></p></div>
+    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Today is&nbsp<span class="weekday0">weekday0</span>&nbsp<span class="date0">date</span></p></div>
     <div
       class="is-flex is-flex-direction-row"
       style="gap: 25px"
@@ -58,15 +58,19 @@ title: (Whether) Weather
           <figure class="image is-16x16">
             <img
             src="/img/wind_unselected.svg"
-              id="wind_today+0_png"
+              class="wind_today+0_png"
               alt="wind_today+0">
             </figure></div>
       </div>
     </div>
   </article>
 </section>
+<section class="box">
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>Hourly<span id="g"></span>&nbsp:</p></div>
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="hourly_breakdown"></div>
+  </section>
   {# week #}
   <section class="box">
-  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>The weather forecast for the next 6 days<span id="g"></span>&nbsp:</p></div>
-  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days"></div>
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>The weather forecast for the next 7 days<span id="g"></span>&nbsp:</p></div>
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next7days"></div>
   </section>

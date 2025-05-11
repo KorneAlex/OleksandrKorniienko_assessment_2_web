@@ -1,11 +1,12 @@
 import { weatherCodeToIcon } from "./utils.js";
 
-export function next6days() {
+export function next7days() {
   let code = "";
-  for (let i = 1; i < 7; i++) {
+  for (let i = 0; i < 7; i++) {
     code += `
-      <figure class="card image is-4by5" style="width: 15%; height: 100%;">
-        <div class="has-text-centered" style="padding: 10px;"><p id="date${i}">sun</p></div>
+      <figure class="card image" style="width: 12%; height: 100%;">
+        <div class="has-text-centered" style="padding-top: 5px;"><p class="weekday${i}">weekday</p></div>
+        <div class="has-text-centered" style="padding-top: 0px;"><p class="date${i}">date</p></div>
         <div class="is-flex is-justify-content-center">
         
         <figure class="image is-96x96">
@@ -24,7 +25,7 @@ export function next6days() {
         <figure class="image is-16x16">
         <img
         src="/img/wind_unselected.svg"
-          id="wind_today+${i}_png"
+          class="wind_today+${i}_png"
           alt="wind_today+${i}"
           style="rotate: -0deg;"
         </figure>
@@ -113,5 +114,37 @@ export function citiesListDropdown(city) {
         </figure>
     
     `;
+      return code;
+    }
+
+    export function hourlyBreakdown(city) {
+      const hourlyData = weatherData[city + "_hourly"];
+      let code = "";
+      for (let i = 0; i < 24; i++) {
+        code += `
+          <figure class="image" style="width: 4%; height: 100%;">
+          <p class="has-text-centered">${hourlyData.hourly.time[i].slice(hourlyData.hourly.time[i].length-5)}</p>
+            <div class="is-flex is-justify-content-center">
+            <figure class="image is-32x32">
+            <img
+              src="/img/${weatherCodeToIcon(hourlyData.hourly.weather_code[i])}"
+              id="weather_at_time+${hourlyData.hourly.weather_code[i]}_png"
+            </figure></div>
+            <div class="card-content is-flex" style="padding: 15px;">
+    
+            <div class="is-flex is-flex-direction-column">
+            <p><span class="has-text-weight-bold">${hourlyData.hourly.temperature_2m[i] + hourlyData.hourly_units.temperature_2m}</span>
+
+            <div class="is-flex is-align-items-center">
+            <p>${hourlyData.hourly.wind_speed_10m[i]}</p>
+            </div>
+    
+            </div>
+            
+            
+            </div>
+          </figure>
+      `;
+      }
       return code;
     }
