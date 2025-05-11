@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <title>(Whether) Weather</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <script src="/data/weather_data.js"></script>
+    <script src="/scripts/script.js"></script>
+</head>
+
+<body>
+      <header class="header container is-widescreen">
+        <nav class="navbar is-flex">
+            <div class="navbar-brand"><img src="/data/logo.png"></div>
+            <h1>HEADER</h1>
+        </nav>
+    </header>
+  <div>
+    
+<section class="section is-flex is-flex-direction-row is-justify-content-center">
+    <div class="card is-flex is-flex-direction-column">
+        <div class="card-header is-flex is-flex-direction-column">
+            <div class="card-header-title is-flex is-flex-direction-column">All data daily</div>
+            <div class="card-content  is-flex is-flex-direction-column">
+                <span id="daily_weather_code">sss</span>
+                <span id="daily_temperature_2m_max">sss</span>
+                <span id="daily_temperature_2m_min"></span>
+                <span id="daily_apparent_temperature_max"></span>
+                <span id="daily_apparent_temperature_min"></span>
+                <span id="daily_sunrise"></span>
+                <span id="daily_sunset"></span>
+                <span id="daily_precipitation_hours"></span>
+                <span id="daily_precipitation_probability_max"></span>
+                <span id="daily_wind_speed_10m_max"></span>
+                <span id="daily_wind_gusts_10m_max"></span>
+                <span id="daily_wind_direction_10m_dominant"></span>
+            </div>
+        </div>
+    </div>
+    <div class="card is-flex is-flex-direction-column">
+        <div class="card-header is-flex is-flex-direction-column">
+            <div class="card-header-title is-flex is-flex-direction-column">All data daily</div>
+            <div class="card-content  is-flex is-flex-direction-column">
+                <span id="hourly_temperature_2m">sss</span>
+                <span id="hourly_relative_humidity_2m">sss</span>
+                <span id="hourly_apparent_temperature"></span>
+                <span id="hourly_precipitation_probability"></span>
+                <span id="hourly_precipitation"></span>
+                <span id="hourly_weather_code"></span>
+                <span id="hourly_wind_speed_10m"></span>
+                <span id="hourly_wind_gusts_10m"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <div class="columns">
+        <div class="column card">
+            <div class="card-header is-flex-direction-column">
+                <div class="card-header-title "><span id="cityName"></span></div>
+                <div class="card-content"><span id="day"></span>
+                    <p>Current time is: <span id="currentTime"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="column card">
+            <div class="card-header is-flex-direction-column">
+                <div class="card-header-title">Temperature</div>
+                <div class="card-content">
+                    <p>max: <span id="maxTemp"></span> min: <span id="minTemp"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="column card">
+            <div class="card-header is-flex-direction-column">
+                <div class="card-header-title">max wind</div>
+                <div class="card-content"><span id="maxWind"></span></div>
+            </div>
+        </div>
+        <div class="column card">
+            <div class="card-header is-flex-direction-column">
+                <div class="card-header-title">NOW</div>
+                <div class="card-content">
+                    <p>Temperature: <span id="currentTemp"></span></p>
+                    <p>Feels like: : <span id="currentTempFeel"></span></p>
+                    <p>Wind: <span id="currentWind"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div></div>
+</body>
+
+</html>
