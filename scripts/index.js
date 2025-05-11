@@ -1,7 +1,13 @@
 import {hoursToTwoChars, minToTwoChars, weather_code_to_icon} from "./utils.js";
+import { next6days } from "./builder.js";       
 
 console.log("INDEX SCRIPT START <==========================================================="); // <<<<<===============================================
+//==========================builder============================================
 
+const next6days2 = document.getElementById("next6days");
+try {next6days2.innerHTML = next6days();} catch (e) {console.log("next6days error")};
+
+//=============================================================================
     const userLocation = "tromso";
     const currentCity = userLocation.toLowerCase(); // amsterdam
     let currentCityName = document.getElementById("currentCityName");
@@ -131,7 +137,24 @@ console.log("INDEX SCRIPT START <===============================================
     try {date4.innerHTML = day4.getDate() + "/" + (day4.getMonth() + 1) + "/" + day4.getFullYear();} catch (e) {console.log("ERROR day4")}
     try {date5.innerHTML = day5.getDate() + "/" + (day5.getMonth() + 1) + "/" + day5.getFullYear();} catch (e) {console.log("ERROR day5")}
     try {date6.innerHTML = day6.getDate() + "/" + (day6.getMonth() + 1) + "/" + day6.getFullYear();} catch (e) {console.log("ERROR day6")}
-    
+
+    //==========================next6days==============================================
+
+    const weather_today1 = document.getElementById("weather_today+1_png");
+    const weather_today2 = document.getElementById("weather_today+2_png");
+    const weather_today3 = document.getElementById("weather_today+3_png");
+    const weather_today4 = document.getElementById("weather_today+4_png");
+    const weather_today5 = document.getElementById("weather_today+5_png");
+    const weather_today6 = document.getElementById("weather_today+6_png");
+
+    weather_today1.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+1]);
+    weather_today2.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+2]);
+    weather_today3.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+3]);
+    weather_today4.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+4]);
+    weather_today5.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+5]);
+    weather_today6.src = "/img/" + weather_code_to_icon(currentCityData.daily.weather_code[indexDaily+6]);
+
+
 
 console.log("INDEX SCRIPT END <==========================================================="); // <<<<<===============================================
 

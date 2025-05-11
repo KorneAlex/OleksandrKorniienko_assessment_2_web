@@ -60,50 +60,22 @@ title: (Whether) Weather
   </div>
 </div>
   {# week #}
-  <div class="box is-full">
-    <div class="is-flex-direction-column">
-      <div class="card-header-title">
-        Next 7 days in&nbspCHANGEIT<span id="g"></span>
-        <p>&nbsp:</p>
-      </div>
+  <div class="box">
+  <div><p>Next 7 days in&nbsp<span id="g">CHANGEIT</span>&nbsp:</p></div>
 
-      <div
-        class="card-content is-flex is-flex-direction-row is-justify-content-space-between"
-      >
-        <div style="justify-items: center">
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="next6days">
+      
 
-{# WEEK CARDS #}
+      {# WEEK CARDS #}
 
-
-          <div class="card image is-3by4" style="height: 14rem">
-            <div class="card-content" id="today">
-              
-
-              <div class="column">
-                <div class="card-header-title is-centered"><p class="has-text-weight-bold">Today</p></div>
-                <div
-                  class="is-flex is-flex-direction-row"
-                  style="gap: 15px"
-                >
-                  <div>
-        
-                  </div>
-                  {# <span id="daily_weather_code">weather code</span> #}
-            
-                  <div class="is-flex-direction-column">
-                    <div>
-                      <span class="title has-text-weight-bold" id="daily_temperature_2m_max">11°C</span>
-                    </div>
-                      <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">9°C</span></div>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-          <p>02/05/2025</p>
+      {# <figure class="card image is-4by5" style="width: 15%; height: 100%;">
+        <div class=""><p id="date1">sun</p></div>
+        <div class="card-content">
+        <figure class="image is-96x96">
+          <img src="/img/cloudy.png" alt="test" >
+        </figure>
         </div>
+      </figure>
 
 
 
@@ -111,26 +83,29 @@ title: (Whether) Weather
 
 
 
-        <div class="card image is-3by4" style="height: 14rem">
-          <div class="card-content" id="date1">sat</div>
-        </div>
-        <div class="card image is-3by4" style="height: 14rem">
+
+
+        <div class="card image is-4by5" style="width: 15%; height: 100%;">
           <div class="card-content" id="date2">sun</div>
         </div>
-        <div class="card image is-3by4" style="height: 14rem">
+        <div class="card image is-4by5" style="width: 15%; height: 100%;">
           <div class="card-content" id="date3">mon</div>
         </div>
-        <div class="card image is-3by4" style="height: 14rem">
+        <div class="card image is-4by5" style="width: 15%; height: 100%;">
           <div class="card-content" id="date4">tue</div>
         </div>
-        <div class="card image is-3by4" style="height: 14rem">
+        <div class="card image is-4by5" style="width: 15%; height: 100%;">
           <div class="card-content" id="date5">wed</div>
         </div>
-        <div class="card image is-3by4" style="height: 14rem">
+        <div class="card image is-4by5" style="width: 15%; height: 100%;">
           <div class="card-content" id="date6">thu</div>
-        </div>
+        </div> #}
+
+
       </div>
-    </div>
-  </div>
+      </div>
+
+
+  
   {# other cities #} {% include "otherCities.njk"%}
 </div>
