@@ -1,3 +1,5 @@
+import { weather_code_to_icon } from "./utils.js";
+
 export function next6days() {
   let code = "";
   for (let i = 1; i < 7; i++) {
@@ -24,7 +26,7 @@ export function next6days() {
         src="/img/wind_unselected.svg"
           id="wind_today+${i}_png"
           alt="wind_today+${i}"
-          style="rotate: 0deg;"
+          style="rotate: -0deg;"
         </figure>
         </div>
 
@@ -38,7 +40,7 @@ export function next6days() {
   return code;
 }
 
-function get_cities_list() {
+export function getCitiesList() {
   const cities = [];
   const cities_keys = Object.keys(weatherData);
   for (let i = 0; i < cities_keys.length; i+=2) {
@@ -47,15 +49,63 @@ function get_cities_list() {
   return cities;
 }
 
-export function cities_list() {
-  const cities = get_cities_list();
-  console.log(get_cities_list);
+export function citiesListDropdown(city) {
   let code = "";
-  for (let i = 0; i < cities.length; i++) {
     code += `
     <div class="dropdown-item">
-          <a href="/?focus_city=${cities[i]}"><p>${cities[i].charAt(0).toUpperCase() + cities[i].slice(1)}</p></a>
+          <a href="/?focus_city=${city}"><p>${city.charAt(0).toUpperCase() + city.slice(1)}</p></a>
     </div>`;
-  }
   return code;
 }
+
+// about wind direction: https://www.researchgate.net/figure/Explanation-of-wind-direction_fig2_350209908
+
+
+
+    export function createCityTile(city) {
+      let code = "";
+        const currentCityData = weatherData[city+"_daily"];
+        const currentCityDataHourly = weatherData[city+"_hourly"];
+        const temperature_now = currentCityDataHourly.hourly.temperature_2m[0];
+        const wind_direction = currentCityData.daily.wind_direction_10m_dominant[0];
+        const weather_now = currentCityDataHourly.hourly.weather_code[0];
+        console.log(weather_code_to_icon(weather_now));
+        const weather_now_png = `/img/${weather_code_to_icon(weather_now)}`;
+        code += `
+        <figure class="card image is-4by5" style="width: 15%; height: 100%; margin: 0">
+        <a href="/?focus_city=${city}" style="display: block;">
+          <div class="has-text-centered" style="padding: 10px;"><p id="${city}_city">city</p></div>
+          <div class="is-flex is-justify-content-center">
+          
+          <figure class="image is-96x96">
+          <img
+            src="${weather_now_png}"
+            alt="weather_now_in_${city}"
+          </figure></div>
+          <div class="card-content is-flex" style="padding: 15px;">
+    
+          <div class="is-flex is-flex-direction-column">
+          <p><span class="has-text-weight-bold">${temperature_now}°C</span></p>
+    
+          <div class="is-flex is-align-items-center">
+          <p>Wind:&nbsp</p>
+          <p>${wind_direction}°</p>
+          <figure class="image is-16x16">
+          <img
+          src="/img/wind_unselected.svg"
+            alt="${wind_direction}"
+            style="rotate: -${wind_direction}deg;"
+          </figure>
+          </div>
+    
+          </div>
+          
+          </div>
+          </a>
+          <input type="checkbox" id="fave-${city}" class="checkbox"/>
+    
+        </figure>
+    
+    `;
+      return code;
+    }

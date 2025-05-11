@@ -3,21 +3,22 @@
         <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
     </div>
     <div class="navbar-menu is-align-items-flex-end">
-        <div class="navbar-item"><a href="/pages/dashboard/">My dashboard</a></div>
+        <div class="navbar-item"><a href="/pages/dashboard/?favorites=true">My dashboard</a></div>
         <div class="navbar-item">Location</div>
         {# //============================================================= #}
         <div class="navbar-item dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger">
-            <span>City</span>
+            <a href="/pages/all_cities/"><span>Cities list</span></a>
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
                 <div class="dropdown-content" id="cities_list"></div>
             </div>
         </div>
         {# //============================================================= #}
         <div class="navbar-item">About</div>
-        <div class="navbar-item"><a href="/pages/test/">Test</a></div>
+        
         <switch class="navbar-item">
-            <input type="checkbox" id="switch" class="switch is-rounded" onclick="changeTheme()">
+            <input type="checkbox" id="colorMode-light" class="switch is-rounded">
             <label for="switch">Dark mode</label>
         </switch>
+        <div class="navbar-item"><a href="/pages/test/">Test</a></div>
     </div>
 </nav>

@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 
-<html lang="en" data-theme=light>
 
+<html lang="en" data-theme=light>
+  <style>
+    :root a{
+      color: inherit;
+      text-decoration: none;
+      /* & :hover{
+          text-shadow: 0 0 25px #000;
+
+    } */
+    }
+    </style>
 <head>
   <title>{{ title }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
     <script src="/data/weather_data.js"></script>
+
+    <script src="https://kit.fontawesome.com/f59d84fb1c.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="container is-widescreen">  
@@ -15,7 +28,9 @@
 
     {{ content | safe }}
 
-  <div>{% include "footer.njk"%}</div>
-  <script type="module" src="/scripts/index.js"></script>
+  <footer>{% include "footer.njk"%}</footer>
+  <script type="module" src="/scripts/script.js"></script>
+ 
 </body>
+<script src="/scripts/fav.js"></script>
 </html>

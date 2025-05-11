@@ -2,13 +2,18 @@
 layout: layout.njk
 title: (Whether) Weather
 ---
-
 <section class="container">
-  <div class="title has-text-centered"><h1>My Weather Dashboard</h1></div>
-  <div class="subtitle title has-text-centered"><h2>Favorites</h2></div>
   <article>
 
+    <div class="title has-text-centered">
+      <h1>All cities</h1>
+    </div>
+    <div class="subtitle title has-text-centered">
+      <h2>Favorites</h2>
+    </div>
     <div class="is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center" id="cities_tiles"
       style="gap: 15px"></div>
-    <article>
+  </article>
 </section>
+
+<div id="weather-result"></div>

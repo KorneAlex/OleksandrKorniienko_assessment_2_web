@@ -36,6 +36,7 @@ export function weather_code_to_icon(weather_code) {
     else return "error.png";
 }
 
+
 //============================key_values=============================================
 
 export function get_focus_city () {
