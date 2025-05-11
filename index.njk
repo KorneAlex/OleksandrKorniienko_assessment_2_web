@@ -2,11 +2,14 @@
 layout: layout.njk
 title: (Whether) Weather
 ---
+
 <section class="box">
   <div class="title has-text-centered"><h1>The weather in&nbsp<span id="currentCityName"></span></h1>
   </section>
 
-<section class="box is-flex is-flex-direction-row">
+<section class="box is-flex is-flex-direction-row" id="hero">
+
+
 {# now #}
 <article class="column">
   <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Now:&nbsp</h1><span id="currentTime">time</span></div>
@@ -27,9 +30,12 @@ title: (Whether) Weather
     </div>
   </div>
 </article>
-  {# today #}
+
+
+
+  {# this day #}
   <article class="column">
-    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Today is&nbsp<span class="weekday0">weekday0</span>&nbsp<span class="date0">date</span></p></div>
+    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Forecast for&nbsp<span id="chosenDayWeekday">weekday0</span>&nbsp<span id="chosenDayDate">date</span></p></div>
     <div
       class="is-flex is-flex-direction-row"
       style="gap: 25px"
@@ -58,16 +64,27 @@ title: (Whether) Weather
           <figure class="image is-16x16">
             <img
             src="/img/wind_unselected.svg"
-              class="wind_today+0_png"
-              alt="wind_today+0">
+              id="wind_for_this_day_png"
+              alt="wind_for_this_day_png">
             </figure></div>
       </div>
     </div>
   </article>
+
+
+
 </section>
+
+
+
+
+
+
+
+
 <section class="box">
-  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>Hourly<span id="g"></span>&nbsp:</p></div>
-  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" id="hourly_breakdown"></div>
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>Hourly for&nbsp<span id="chosenDayWeekday"></span>:</p></div>
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" style="overflow-x:scroll;" id="hourly_breakdown"></div>
   </section>
   {# week #}
   <section class="box">

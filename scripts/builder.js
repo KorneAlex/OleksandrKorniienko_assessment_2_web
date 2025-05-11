@@ -1,10 +1,21 @@
-import { weatherCodeToIcon } from "./utils.js";
+import { weatherCodeToIcon, hoursToTwoChars, getFocusCity, getDayKeyValue } from "./utils.js";
 
+/**
+ * Generates HTML code for a 7-day weather forecast display.
+ *
+ * This function creates a series of HTML figure elements, each representing
+ * a day in the next 7 days, starting from today. Each figure includes weather
+ * information such as the day, date, temperature, and wind details.
+ *
+ * @returns {string} The generated HTML code as a string.
+ */
 export function next7days() {
   let code = "";
   for (let i = 0; i < 7; i++) {
+    const daySelector = (i===0) ? "day=today":"day=today+"+i;
     code += `
-      <figure class="card image" style="width: 12%; height: 100%;">
+    <figure class="card image" style="width: 12%; height: 100%; ${(daySelector.slice(10) === getDayKeyValue().slice(6)) ? "border: solid;":"border: none;"}">
+    <a href="?focus_city=${getFocusCity()}&${daySelector}">
         <div class="has-text-centered" style="padding-top: 5px;"><p class="weekday${i}">weekday</p></div>
         <div class="has-text-centered" style="padding-top: 0px;"><p class="date${i}">date</p></div>
         <div class="is-flex is-justify-content-center">
@@ -17,8 +28,8 @@ export function next7days() {
         <div class="card-content is-flex" style="padding: 15px;">
 
         <div class="is-flex is-flex-direction-column">
-        <p><span class="has-text-weight-bold" id="daily_temperature_2m_max_today+${i}">XX°C</span>
-        <span id="daily_temperature_2m_min_today+${i}">xx°C</span></p>
+        <p><span class="has-text-weight-bold" id="daily_temperature_2m_max_forWeek+${i}">XX°C</span>
+        <span id="daily_temperature_2m_min_forWeek+${i}">xx°C</span></p>
 
         <div class="is-flex is-align-items-center">
         <p>Wind:&nbsp</p>
@@ -35,12 +46,19 @@ export function next7days() {
         
         
         </div>
+        </a>
       </figure>
   `;
   }
   return code;
 }
 
+/**
+ * Retrieves a list of city names derived from the keys of the `weatherData` object.
+ * Assumes that the keys in `weatherData` contain city names followed by a 6-character suffix.
+ *
+ * @returns {string[]} An array of city names extracted from the keys of `weatherData`.
+ */
 export function getCitiesList() {
   const cities = [];
   const cities_keys = Object.keys(weatherData);
@@ -50,11 +68,17 @@ export function getCitiesList() {
   return cities;
 }
 
+/**
+ * Generates an HTML string for a dropdown item representing a city.
+ *
+ * @param {string} city - The name of the city to include in the dropdown item.
+ * @returns {string} The HTML string for the dropdown item, with the city name capitalized.
+ */
 export function citiesListDropdown(city) {
   let code = "";
     code += `
     <div class="dropdown-item">
-          <a href="/?focus_city=${city}"><p>${city.charAt(0).toUpperCase() + city.slice(1)}</p></a>
+          <a href="/?focus_city=${city}&day=today"><p>${city.charAt(0).toUpperCase() + city.slice(1)}</p></a>
     </div>`;
   return code;
 }
@@ -63,6 +87,22 @@ export function citiesListDropdown(city) {
 
 
 
+    /**
+     * Generates an HTML string representing a city tile with weather information.
+     *
+     * @param {string} city - The name of the city for which the tile is created.
+     * @returns {string} An HTML string representing the city tile.
+     *
+     * @description
+     * This function creates a city tile that displays the current weather information
+     * for a given city. The tile includes the city's name, current temperature, wind
+     * direction, and a weather icon. It also includes a favorite button and a link
+     * to focus on the city's detailed weather page.
+     *
+     * The function relies on global `weatherData` to fetch the city's daily and hourly
+     * weather data and uses the `weatherCodeToIcon` function to determine the appropriate
+     * weather icon.
+     */
     export function createCityTile(city) {
       let code = "";
         const currentCityData = weatherData[city+"_daily"];
@@ -70,7 +110,6 @@ export function citiesListDropdown(city) {
         const temperature_now = currentCityDataHourly.hourly.temperature_2m[0];
         const wind_direction = currentCityData.daily.wind_direction_10m_dominant[0];
         const weather_now = currentCityDataHourly.hourly.weather_code[0];
-        console.log(weatherCodeToIcon(weather_now));
         const weather_now_png = `/img/${weatherCodeToIcon(weather_now)}`;
         code += `
         <figure class="card image is-4by5" style="width: 15%; height: 100%; margin: 0">
@@ -79,7 +118,7 @@ export function citiesListDropdown(city) {
             <i id="fave-${city}" class="fa-regular fa-heart"></i>
         </button>
       
-        <a href="/?focus_city=${city}" style="display: block;">
+        <a href="/?focus_city=${city}&day=today" style="display: block;">
      
           <div class="has-text-centered" style="padding: 10px;"><p id="${city}_city">city</p></div>
       
@@ -117,12 +156,35 @@ export function citiesListDropdown(city) {
       return code;
     }
 
-    export function hourlyBreakdown(city) {
+    /**
+     * Generates an HTML string representing the hourly weather breakdown for a given city.
+     *
+     * @param {string} city - The name of the city for which to generate the hourly weather breakdown.
+     * @returns {string} An HTML string containing weather information for each hour of the day.
+     *
+     * The function retrieves hourly weather data for the specified city from a global `weatherData` object.
+     * It highlights the current hour's weather data with a distinct style and includes information such as:
+     * - Time of the hour
+     * - Weather icon based on the weather code
+     * - Temperature with units
+     * - Wind speed with units
+     *
+     * Note: The function assumes the existence of helper functions `hoursToTwoChars` and `weatherCodeToIcon`,
+     * as well as a `weatherData` object containing the necessary weather data.
+     */
+    export function hourlyBreakdown(city, dayFromToday) {
       const hourlyData = weatherData[city + "_hourly"];
+      const localTime = new Date().getHours();
+      // I wanted to make timeshift depending on the city (-12 - +12) but we dont have this data ¯\_(° ͜ʖ °)_/¯
+      const timeHoursInTheCurrentCityNow = hoursToTwoChars(localTime); 
       let code = "";
-      for (let i = 0; i < 24; i++) {
-        code += `
-          <figure class="image" style="width: 4%; height: 100%;">
+      dayFromToday = (dayFromToday ==="today") ? 0:dayFromToday.slice(dayFromToday.length-1);
+      let i = dayFromToday*24;
+      let j = i+24;
+      for (i; i < j; i++) {
+        if (hoursToTwoChars(i)===hoursToTwoChars(timeHoursInTheCurrentCityNow)){
+          code += `
+          <figure class="image  is-col-min-1" style="border: solid; padding: 3px">
           <p class="has-text-centered">${hourlyData.hourly.time[i].slice(hourlyData.hourly.time[i].length-5)}</p>
             <div class="is-flex is-justify-content-center">
             <figure class="image is-32x32">
@@ -130,13 +192,39 @@ export function citiesListDropdown(city) {
               src="/img/${weatherCodeToIcon(hourlyData.hourly.weather_code[i])}"
               id="weather_at_time+${hourlyData.hourly.weather_code[i]}_png"
             </figure></div>
-            <div class="card-content is-flex" style="padding: 15px;">
+            <div class="card-content is-flex is-justify-content-center">
     
             <div class="is-flex is-flex-direction-column">
             <p><span class="has-text-weight-bold">${hourlyData.hourly.temperature_2m[i] + hourlyData.hourly_units.temperature_2m}</span>
 
             <div class="is-flex is-align-items-center">
-            <p>${hourlyData.hourly.wind_speed_10m[i]}</p>
+            <p>${hourlyData.hourly.wind_speed_10m[i] + hourlyData.hourly_units.wind_speed_10m}</p>
+            </div>
+    
+            </div>
+            
+
+            </div>
+            <div class="has-text-centered"<p>Now</p></div>
+          </figure>
+      `;
+        } else {
+        code += `
+          <figure class="image  is-col-min-1" style="border: solid; border-color: transparent; padding: 3px"">
+          <p class="has-text-centered">${hourlyData.hourly.time[i].slice(hourlyData.hourly.time[i].length-5)}</p>
+            <div class="is-flex is-justify-content-center">
+            <figure class="image is-32x32">
+            <img
+              src="/img/${weatherCodeToIcon(hourlyData.hourly.weather_code[i])}"
+              id="weather_at_time+${hourlyData.hourly.weather_code[i]}_png"
+            </figure></div>
+             <div class="card-content is-flex is-justify-content-center">
+    
+            <div class="is-flex is-flex-direction-column">
+            <p><span class="has-text-weight-bold">${hourlyData.hourly.temperature_2m[i] + hourlyData.hourly_units.temperature_2m}</span>
+
+            <div class="is-flex is-align-items-center">
+            <p>${hourlyData.hourly.wind_speed_10m[i] + hourlyData.hourly_units.wind_speed_10m}</p>
             </div>
     
             </div>
@@ -145,6 +233,7 @@ export function citiesListDropdown(city) {
             </div>
           </figure>
       `;
+    }
       }
       return code;
     }

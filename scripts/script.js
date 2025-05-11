@@ -1,12 +1,14 @@
-import {hoursToTwoChars, minToTwoChars, weatherCodeToIcon, getFocusCity} from "./utils.js";
+import {hoursToTwoChars, minToTwoChars, weatherCodeToIcon, getFocusCity, getDayKeyValue, getLocation} from "./utils.js";
 import {next7days, citiesListDropdown, getCitiesList, createCityTile, hourlyBreakdown} from "./builder.js";       
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
-
-console.log("INDEX SCRIPT START <==========================================================="); // <<<<<===============================================
-
-
 //==========================builder============================================
+
+// const hero = document.getElementById("hero");
+// try { hero.innerHTML = build_hero();} catch (e) {"ERROR NO HERO HERE"}
+
 
 // city tiles
 const tilesContainer = document.getElementById("cities_tiles");
@@ -14,32 +16,22 @@ const citiesList = getCitiesList();
 const urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get("favorites")) {
     const favCities = Object.keys(localStorage).filter(key => localStorage.getItem(key) === "true" && citiesList.includes(key));
-    try {tilesContainer.innerHTML = favCities.map(city => createCityTile(city)).join("");} catch (e) {console.log("fav cities_tiles error")}
+    try {tilesContainer.innerHTML = favCities.map(city => createCityTile(city)).join("");} catch (e) {console.log("ERROR fav cities_tiles")}
 } else {
 try {tilesContainer.innerHTML = citiesList.map(city => createCityTile(city)).join("");}
-catch (e) {console.log("cities_tiles error")}
+catch (e) {console.log("ERROR cities_tiles")}
 }
 
 //================================hourly_breakdown=======================================================
 
 const hours = document.getElementById("hourly_breakdown");
-try {hours.innerHTML = hourlyBreakdown(urlParams.get("focus_city"));} catch (e) {console.log("AAAAAAAAAAAAAAAAAAAAAAA")
+try {hours.innerHTML = hourlyBreakdown(urlParams.get("focus_city"), getDayKeyValue());} catch (e) {console.log("ERROR focus city for hourly breakdown")
 }
-
-
-
-
-
-
-
-
-
 
 // active menu
 const activeMenu = urlParams.get("menu");
 const menuItem = document.getElementById(activeMenu);
-console.log("menu item: " + menuItem);
-try{ menuItem.style.backgroundColor = "#ffb901";} catch (e) {console.log("menu item error")}
+try{ menuItem.style.backgroundColor = "#ffb901";} catch (e) {console.log("ERROR menu item")}
 
 
 // dropdown list
@@ -48,21 +40,18 @@ try {cities_list_dropdown.innerHTML = citiesList.map(city => citiesListDropdown(
 
 // next 6 days forecast
 const next7days2 = document.getElementById("next7days");
-try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days error")};
+try {next7days2.innerHTML = next7days();} catch (e) {console.log("ERROR next7days")};
 
 //=============================================================================
     const userLocation = "waterford";
     let currentCity = "";
     try {currentCity = getFocusCity();} catch (e) {console.log("ERROR getFocusCity")}
-        if (currentCity === null) {
-        currentCity = userLocation;
-    }
-    console.log("currentCity: " + currentCity);
     let currentCityName = document.getElementById("currentCityName");
     try {currentCityName.innerHTML = currentCity.charAt(0).toUpperCase() + currentCity.slice(1);} catch (e) {console.log("ERROR cityName")}
     // const title = document.getElementById("title");
     const currentCityData = weatherData[currentCity + "_daily"] // amsterdam_daily
     const currentCityDataHourly = weatherData[currentCity + "_hourly"] // amsterdam_hourly
+
 
 
 //===========================time=============================================
@@ -85,8 +74,13 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
     const daily_wind_speed_10m_max = document.getElementById("daily_wind_speed_10m_max");
     const daily_wind_gusts_10m_max = document.getElementById("daily_wind_gusts_10m_max");
     const daily_wind_direction_10m_dominant = document.getElementById("daily_wind_direction_10m_dominant");
+    const wind_for_this_day = document.getElementById("wind_for_this_day_png");
 
-    const indexDaily = 0;
+    //I felt like a genius when I wrote it hahah
+    let indexDaily = 0;
+    indexDaily = (getDayKeyValue()!=null) ? (getDayKeyValue()==="today") ? 0:getDayKeyValue().slice(getDayKeyValue().length-1):0;
+
+    const indexDaily7D = 0;
 
     try {daily_weather_code.innerHTML = currentCityData.daily.weather_code[indexDaily];} catch (e) {console.log("ERROR daily_weather_code")}
     try {daily_temperature_2m_max.innerHTML = currentCityData.daily.temperature_2m_max[indexDaily] + currentCityData.daily_units.temperature_2m_max;} catch (e) {console.log("ERROR daily_temperature_2m_max")}
@@ -100,7 +94,7 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
     try {daily_wind_speed_10m_max.innerHTML = currentCityData.daily.wind_speed_10m_max[indexDaily] + currentCityData.daily_units.wind_speed_10m_max;}   catch (e) {console.log("ERROR daily_wind_speed_10m_max")}
     try {daily_wind_gusts_10m_max.innerHTML = currentCityData.daily.wind_gusts_10m_max[indexDaily] + currentCityData.daily_units.wind_gusts_10m_max;} catch (e) {console.log("ERROR daily_wind_gusts_10m_max")}
     try {daily_wind_direction_10m_dominant.innerHTML = currentCityData.daily.wind_direction_10m_dominant[indexDaily] + currentCityData.daily_units.wind_direction_10m_dominant;}    catch (e) {console.log("ERROR daily_wind_direction_10m_dominant")}
-    console.log("POINTER FOR THE ERROR <======================="); // <<<<<===============================================
+    try {wind_for_this_day.style = `rotate: -${currentCityData.daily.wind_direction_10m_dominant[indexDaily]}deg;`; } catch (e) {"ERROR WIND FOR THIS DAY"}
     
    
     //==========================hourly==========================================
@@ -138,6 +132,8 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     const weekdayToday = () => {
+        const weekdayForThisDay = document.getElementById("chosenDayWeekday");
+        try { weekdayForThisDay.className = `weekday${indexDaily}`;} catch (e) {console.log("ERROR weekdayToday")}
         for (let i = 0; i < 7; i++) {
             const weekday = document.getElementsByClassName(`weekday${i}`);
             const day = new Date();
@@ -151,6 +147,9 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
     
     //https://stackoverflow.com/questions/23081158/javascript-get-date-of-the-next-day
     const dateToday = () => {
+        const dateForThisDay = document.getElementById("chosenDayDate");
+        try { dateForThisDay.className = `date${indexDaily}`;} catch (e) {console.log("ERROR dateToday")}
+        console.log(dateForThisDay);
         for (let i = 0; i < 7; i++) {
             const date = document.getElementsByClassName(`date${i}`);
             const day = new Date();
@@ -169,7 +168,7 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
     const weatherForWeek = () => {
         for (let i = 0; i < 7; i++) {
             const weather_today = document.getElementById(`weather_today+${i}_png`);
-            try { weather_today.src = "/img/" + weatherCodeToIcon(currentCityData.daily.weather_code[indexDaily+i]);} catch (e) {console.log(`ERROR weather_today+${i}`)}
+            try { weather_today.src = "/img/" + weatherCodeToIcon(currentCityData.daily.weather_code[indexDaily7D+i]);} catch (e) {console.log(`ERROR weather_today+${i}`)}
         }
     }
 
@@ -177,22 +176,17 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
         for (let i = 0; i < 7; i++) {
             const wind_today = document.getElementsByClassName(`wind_today+${i}_png`);
             [...wind_today].forEach(element => {
-                element.style = `rotate: -${currentCityData.daily.wind_direction_10m_dominant[indexDaily+i]}deg;`;
+                element.style = `rotate: -${currentCityData.daily.wind_direction_10m_dominant[indexDaily7D+i]}deg;`;
             })
 
         }
     }
-
-
-
-
-// temp min max
-    const dailyTemperatureToday = () => {
+    const dailyTemperatureForWeek = () => {
         for (let i = 0; i < 7; i++) {
-            const daily_temperature_2m_max_today = document.getElementById(`daily_temperature_2m_max_today+${i}`);
-            const daily_temperature_2m_min_today = document.getElementById(`daily_temperature_2m_min_today+${i}`);
-            try {daily_temperature_2m_max_today.innerHTML = currentCityData.daily.temperature_2m_max[indexDaily+i] + currentCityData.daily_units.temperature_2m_max;} catch (e) {console.log(`ERROR daily_temperature_2m_max_today+${i}`)}
-            try {daily_temperature_2m_min_today.innerHTML = currentCityData.daily.temperature_2m_min[indexDaily+i] + currentCityData.daily_units.temperature_2m_min;} catch (e) {console.log(`ERROR daily_temperature_2m_min_today+${i}`)}
+            const daily_temperature_2m_max_forWeek = document.getElementById(`daily_temperature_2m_max_forWeek+${i}`);
+            const daily_temperature_2m_min_forWeek = document.getElementById(`daily_temperature_2m_min_forWeek+${i}`);
+            try {daily_temperature_2m_max_forWeek.innerHTML = currentCityData.daily.temperature_2m_max[indexDaily7D+i] + currentCityData.daily_units.temperature_2m_max;} catch (e) {console.log(`ERROR daily_temperature_2m_max_today+${i}`)}
+            try {daily_temperature_2m_min_forWeek.innerHTML = currentCityData.daily.temperature_2m_min[indexDaily7D+i] + currentCityData.daily_units.temperature_2m_min;} catch (e) {console.log(`ERROR daily_temperature_2m_min_today+${i}`)}
         }
     }
 
@@ -205,37 +199,30 @@ try {next7days2.innerHTML = next7days();} catch (e) {console.log("next7days erro
         });
     }
     
-
-
-
-
+    //===============functions for data==============================================
 
     weekdayToday();
     dateToday();
     windForWeek();
     weatherForWeek();
-    dailyTemperatureToday();
+    dailyTemperatureForWeek();
     cityNameConverter();
-    // getHourlyData();
-    // hourlyBreakdown();
+    // getLocation();
+    
+    
+    //===========================favorites===========================================
+    
+    document.querySelectorAll("[id^=fave-]").forEach(heart => {
+        heart.addEventListener('click', (event)=> {
+            const city = event.target.id.slice(5);
+            const isFav = localStorage.getItem(city) === 'true';
+            localStorage.setItem(city, !isFav); 
+            heart.classList = !isFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
+        })
+        const city = heart.id.slice(5); 
+        const isAlreadyFav = localStorage.getItem(city) === 'true';
+        heart.classList = isAlreadyFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
+    });
 
-
-    // daily_temperature_2m_max_today+${i}
-console.log("INDEX SCRIPT END <==========================================================="); // <<<<<===============================================
-
-
-//===========================favorites===========================================
-
-document.querySelectorAll("[id^=fave-]").forEach(heart => {
-    heart.addEventListener('click', (event)=> {
-        const city = event.target.id.slice(5);
-        const isFav = localStorage.getItem(city) === 'true';
-        localStorage.setItem(city, !isFav); 
-        heart.classList = !isFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
-    })
-    const city = heart.id.slice(5); 
-    const isAlreadyFav = localStorage.getItem(city) === 'true';
-    heart.classList = isAlreadyFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
-});
-
+    
 })
