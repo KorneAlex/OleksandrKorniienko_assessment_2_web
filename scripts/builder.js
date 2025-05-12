@@ -103,6 +103,8 @@ export function citiesListDropdown(city) {
      * The function relies on global `weatherData` to fetch the city's daily and hourly
      * weather data and uses the `weatherCodeToIcon` function to determine the appropriate
      * weather icon.
+     * 
+     * https://emojidb.org/hour-emojis?utm_source=user_search
      */
     export function createCityTile(city) {
       let code = "";
@@ -113,16 +115,13 @@ export function citiesListDropdown(city) {
         const weather_now = currentCityDataHourly.hourly.weather_code[0];
         const weather_now_png = `/img/${weatherCodeToIcon(weather_now)}`;
         code += `
-        <figure class="card image is-4by5" style="width: 15%; height: 100%; margin: 0">
-
+     <div class="is-flex is-flex-direction-row" style="gap: 15px">
+        <div class="card" style="width: 200px; margin: 0">
         <button class="card-header-icon" id="heart">
             <i id="fave-${city}" class="fa-regular fa-heart"></i>
         </button>
-      
         <a href="/?focus_city=${city}&day=today" style="display: block;">
-     
           <div class="has-text-centered" style="padding: 10px;"><p id="${city}_city">city</p></div>
-      
           <div class="is-flex is-justify-content-center">
           <figure class="image is-96x96">
           <img
@@ -130,10 +129,8 @@ export function citiesListDropdown(city) {
             alt="weather_now_in_${city}"
           </figure></div>
           <div class="card-content is-flex" style="padding: 15px;">
-    
           <div class="is-flex is-flex-direction-column">
           <p><span class="has-text-weight-bold">${temperature_now}°C</span></p>
-    
           <div class="is-flex is-align-items-center">
           <p>Wind:&nbsp</p>
           <p>${wind_direction}°</p>
@@ -144,15 +141,39 @@ export function citiesListDropdown(city) {
             style="rotate: -${wind_direction}deg;"
           </figure>
           </div>
-    
           </div>
-          
           </div>
           </a>
-          
-    
-        </figure>
-    
+        </div>
+      <div class="is-flex is-justify-content-space-evenly is-align-items-center is-flex-grow-1 is-flex-direction-row card cardInfo" style="display: none; margin: 0">
+      <div class="">
+      
+<table>
+    <tr><td><p>♨️Max°C today:&nbsp</td><td>${currentCityData.daily.temperature_2m_max[0] + currentCityData.daily_units.temperature_2m_max}</p></td></tr>
+    <tr><td><p>❄️Min°C today:&nbsp</td><td>${currentCityData.daily.temperature_2m_min[0] + currentCityData.daily_units.temperature_2m_min}</p></td></tr>
+    <tr><td><p>🥵Fells like max:&nbsp</td><td>${currentCityData.daily.apparent_temperature_max[0] + currentCityData.daily_units.apparent_temperature_max}</p></td></tr>
+    <tr><td><p>🥶Fells like min:&nbsp</td><td>${currentCityData.daily.apparent_temperature_min[0] + currentCityData.daily_units.apparent_temperature_min}</p></td></tr>
+    <tr><td><p>🌅Sunrise:&nbsp</td><td>${currentCityData.daily.sunrise[0].slice(currentCityData.daily.sunrise[0].length-5)}</p></td></tr>
+    <tr><td><p>🌇Sunset:&nbsp</td><td>${currentCityData.daily.sunset[0].slice(currentCityData.daily.sunset[0].length-5)}</p></td></tr>
+</table>
+    </div>
+    <div>
+    <table>
+    <tr><td><p>💧Precipitation hours:</td><td>&nbsp${currentCityData.daily.precipitation_hours[0] + currentCityData.daily_units.precipitation_hours}</p></td></tr>
+    <tr><td><p>💧Precipitation probability:</td><td>&nbsp${currentCityData.daily.precipitation_probability_max[0] + currentCityData.daily_units.precipitation_probability_max}</p></td></tr>
+    <tr><td><p>💨Wind speed max:</td><td>&nbsp${currentCityData.daily.wind_speed_10m_max[0] + currentCityData.daily_units.wind_speed_10m_max}</p></td></tr>
+    <tr><td><p>💨Wind gusts max:</td><td>&nbsp${currentCityData.daily.wind_gusts_10m_max[0] + currentCityData.daily_units.wind_gusts_10m_max}</p></td></tr>
+    <tr><td><p>🧭Wind direction:</td><td>&nbsp${currentCityData.daily.wind_direction_10m_dominant[0] + currentCityData.daily_units.wind_direction_10m_dominant}</p></td></tr>
+    </table>
+    </div>
+</div>
+      </div>
+
+     
+</div>
+</div>
+
+
     `;
       return code;
     }

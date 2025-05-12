@@ -115,13 +115,13 @@ export function getDayKeyValue() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error);
       } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        try{ x.innerHTML = "Geolocation is not supported by this browser.";} catch (e) {"ERRORR location"}
       }
     }
     
     function success(position) {
-      x.innerHTML = "Latitude: " + position.coords.latitude +
-      "<br>Longitude: " + position.coords.longitude;
+      try{ x.innerHTML = "Latitude: " + position.coords.latitude +
+      "<br>Longitude: " + position.coords.longitude;} catch (e) {"ERRORR location"}
     }
     
     function error() {

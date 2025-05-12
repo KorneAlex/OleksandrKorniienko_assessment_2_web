@@ -16,10 +16,15 @@ const citiesList = getCitiesList();
 const urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get("favorites")) {
     const favCities = Object.keys(localStorage).filter(key => localStorage.getItem(key) === "true" && citiesList.includes(key));
-    try {tilesContainer.innerHTML = favCities.map(city => createCityTile(city)).join("");} catch (e) {console.log("ERROR fav cities_tiles")}
+    if(favCities.length>0){
+    try {tilesContainer.innerHTML = favCities.map(city => createCityTile(city)).join("");} catch (e) {console.log("ERROR fav cities_tiles")}}
 } else {
 try {tilesContainer.innerHTML = citiesList.map(city => createCityTile(city)).join("");}
 catch (e) {console.log("ERROR cities_tiles")}
+const allCitiesInfo = document.getElementsByClassName("cardInfo");
+    [...allCitiesInfo].forEach(element => {
+        element.remove();
+    });
 }
 
 //================================hourly_breakdown=======================================================
