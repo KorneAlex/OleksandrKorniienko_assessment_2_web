@@ -54,95 +54,98 @@
 </head>
 
 <body class="container is-widescreen is-fullheight">
-  <nav class="navbar" role="navigation" aria-label="main navigation" style="padding: 20px;">
-        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
-    <div class="navbar-menu is-align-items-flex-end is-justify-content-end">
-        <div class="navbar-item box" id="dashboard"><a href="/pages/dashboard/?menu=dashboard&favorites=true">My dashboard</a></div>
-        <div class="navbar-item box" id="location"><a href="/pages/location/?menu=location">Location</a></div>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="150"></a> 
+            <a class="navbar-burger" id="burger">
+            <span ></span>
+            <span ></span>
+            <span ></span>
+            <span ></span>
+          </a></div>
+    <div class="navbar-menu navbar-end" id="nav-links">
+        <div class="navbar-item box has-text-centered is-clickable" id="dashboard"><p>My dashboard</p></div>
         
-        <div class="navbar-item box dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger" id="all_cities">
-            <a href="/pages/all_cities/?menu=all_cities"><span>Cities list</span></a>
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="navbar-item box has-text-centered is-clickable dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger" id="all_cities">
+            <p><span>Cities list</span></p>
+            <div class="dropdown-menu is-hidden-touch" id="dropdown-menu" role="menu">
                 <div class="dropdown-content" id="cities_list"></div>
             </div>
         </div>
         
-        <div class="navbar-item box" id="about"><a href="/pages/about/?menu=about">About</a></div>
-        
-        
+        <div class="navbar-item box has-text-centered is-clickable" id="location"><p>Location</p></div>
+        <div class="navbar-item box has-text-centered is-clickable" id="about"><p>About</p></div>
      
-            <button class="navbar-item box" id="colorMode">
+            <div class="navbar-item box is-flex is-clickable  is-justify-content-center" id="colorMode">
                 <i class="fa-regular fa-heart" id="colorModeIndicator"></i>
                 <p>Dark mode</p]>
-                </button>
+                </div>
+               
     </div>
 </nav>
 
   
-<section class="box">
-  <div class="title has-text-centered"><h1>The weather in&nbsp<span id="currentCityName"></span></h1>
-  </section>
+<section class="box is-0-mobile">
+  <div class="title has-text-centered">
+    <h1>The weather in&nbsp<span id="currentCityName"></span></h1>
+</section>
 
-<section class="box is-flex is-flex-direction-row" id="hero">
+<section class="box is-flex is-flex-direction-row is-flex-wrap-wrap" id="hero">
 
 
-
-<article class="column">
-  <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Now:&nbsp</h1><span id="currentTime">time</span></div>
-  <div class="is-flex is-flex-direction-row" style="gap: 25px">
-    <div><img
-      id="weather_now_png"
-      alt="weather_now"
-      class="image is-128x128 is-offset-one-fifth"
-      style="margin-left: 20px">
-  </div>
-    <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span></div>
-    <div style="align-self: flex-end; flex-grow: 1">
-      <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
-      <p>Wind:&nbsp<span id="hourly_wind_speed_10m">XXm/s</span></p>
-      <p>Wind gusts:&nbsp<span id="hourly_wind_gusts_10m">XXm/s</span></p>
-      <p>Relative humidity:&nbsp<span id="hourly_relative_humidity_2m">XXm/s</span></p>
-      <p>Precipitation:&nbsp<span id="hourly_precipitation">XXm/s</span></p>
+  
+  <article class="column" style="min-width: 300px;">
+    <div>
+      <p class="has-text-weight-bold" style="padding-top: 0; padding-bottom: 15px;">Now:&nbsp</h1><span
+          id="currentTime">time</span>
     </div>
-  </div>
-</article>
+    <div class="is-flex is-flex-wrap-wrap" style="gap: 25px">
+      <figure class="image">
+        <img id="weather_now_png" alt="weather_now" class="image is-128x128 is-1by1">
+      </figure>
+      <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span></div>
+      <div>
+        <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
+        <p>Wind:&nbsp<span id="hourly_wind_speed_10m">XXm/s</span></p>
+        <p>Wind gusts:&nbsp<span id="hourly_wind_gusts_10m">XXm/s</span></p>
+        <p>Relative humidity:&nbsp<span id="hourly_relative_humidity_2m">XXm/s</span></p>
+        <p>Precipitation:&nbsp<span id="hourly_precipitation">XXm/s</span></p>
+      </div>
+    </div>
+  </article>
 
 
 
   
-  <article class="column">
-    <div class="card-header-title is-centered"><p class="has-text-weight-bold" style="padding: 15px; padding-top: 0;">Forecast for&nbsp<span id="chosenDayWeekday">weekday0</span>&nbsp<span id="chosenDayDate">date</span></p></div>
-    <div
-      class="is-flex is-flex-direction-row"
-      style="gap: 25px"
-    >
-      <div>
-        <img
-          id="weather_today_png"
-          alt="weather_today"
-          class="image is-128x128 is-offset-one-fifth"
-          style="margin-left: 20px">
-      </div>
+  <article class="column" style="min-width: 300px;">
+    <div>
+      <p class="has-text-weight-bold" style="padding-top: 0; padding-bottom: 15px;">Forecast for&nbsp<span
+          id="chosenDayWeekday">weekday0</span>&nbsp<span id="chosenDayDate">date</span></p>
+    </div>
+    <div class="is-flex is-flex-wrap-wrap" style="gap: 25px">
+      <figure class="image">
+        <img id="weather_today_png" alt="weather_today" class="image is-128x128 is-1by1">
+      </figure>
       <div class="is-flex-direction-column">
         <div>
-          <span class="title has-text-weight-bold" id="daily_temperature_2m_max">XX°C</span></div>
-          <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span></div>
+          <span class="title has-text-weight-bold" id="daily_temperature_2m_max">XX°C</span>
         </div>
+        <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span>
+        </div>
+      </div>
 
       <div style="margin-right: 20px;">
-        <p>Feels like:&nbsp<span id="daily_apparent_temperature_min">XX°C</span>&nbspto&nbsp<span id="daily_apparent_temperature_max">XX°C</span></p>
+        <p>Feels like:&nbsp<span id="daily_apparent_temperature_min">XX°C</span>&nbspto&nbsp<span
+            id="daily_apparent_temperature_max">XX°C</span></p>
         <p>Sunrise:&nbsp<span id="daily_sunrise">time</span></p>
         <p>Sunset:&nbsp<span id="daily_sunset">time</span></p>
         <p>Wind:&nbsp<span id="daily_wind_speed_10m_max">XXm/s</span></p>
         <p>Gusts up to:&nbsp<span id="daily_wind_gusts_10m_max">XXm/s</span></p>
         <div class="is-flex is-flex-direction-row">
-        <p>Wind direction:&nbsp<span id="daily_wind_direction_10m_dominant">XXm/s</span></p>
+          <p>Wind direction:&nbsp<span id="daily_wind_direction_10m_dominant">XXm/s</span></p>
           <figure class="image is-16x16">
-            <img
-            src="/img/wind_unselected.svg"
-              id="wind_for_this_day_png"
-              alt="wind_for_this_day_png">
-            </figure></div>
+            <img src="/img/wind_unselected.svg" id="wind_for_this_day_png" alt="wind_for_this_day_png">
+          </figure>
+        </div>
       </div>
     </div>
   </article>
@@ -154,14 +157,20 @@
 
 
 <section class="box">
-  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>Hourly for&nbsp<span id="chosenDayWeekday"></span>:</p></div>
-  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" style="overflow-x:scroll;" id="hourly_breakdown"></div>
-  </section>
-  
-  <section class="box">
-  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;"><p>The weather forecast for the next 7 days:</p></div>
-  <div class="columns is-full is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap" id="next7days"></div>
-  </section>
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;">
+    <p>Hourly for&nbsp<span id="chosenDayWeekdayHourly"></span>:</p>
+  </div>
+  <div class="cards is-full is-flex is-flex-direction-row is-justify-content-space-around" style="overflow-x:scroll;"
+    id="hourly_breakdown"></div>
+</section>
+
+<section class="box">
+  <div class="has-text-centered has-text-weight-bold" style="padding: 15px; padding-top: 0;">
+    <p>The weather forecast for the next 7 days:</p>
+  </div>
+  <div class="columns is-full is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap"
+    id="next7days"></div>
+</section>
 
   <footer class="footer box">
     <section class="content has-text-centered">

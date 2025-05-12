@@ -1,23 +1,28 @@
-<nav class="navbar" role="navigation" aria-label="main navigation" style="padding: 20px;">
-        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="120"></a></div>
-    <div class="navbar-menu is-align-items-flex-end is-justify-content-end">
-        <div class="navbar-item box" id="dashboard"><a href="/pages/dashboard/?menu=dashboard&favorites=true">My dashboard</a></div>
-        <div class="navbar-item box" id="location"><a href="/pages/location/?menu=location">Location</a></div>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand"><a href="/index/"><img src="/data/logo.png" width="150"></a> 
+            <a class="navbar-burger" id="burger">
+            <span ></span>
+            <span ></span>
+            <span ></span>
+            <span ></span>
+          </a></div>
+    <div class="navbar-menu navbar-end" id="nav-links">
+        <div class="navbar-item box has-text-centered is-clickable" id="dashboard"><p>My dashboard</p></div>
         {# //============================================================= #}
-        <div class="navbar-item box dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger" id="all_cities">
-            <a href="/pages/all_cities/?menu=all_cities"><span>Cities list</span></a>
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="navbar-item box has-text-centered is-clickable dropdown is-hoverable is-fullheight-with-navbar dropdown-trigger" id="all_cities">
+            <p><span>Cities list</span></p>
+            <div class="dropdown-menu is-hidden-touch" id="dropdown-menu" role="menu">
                 <div class="dropdown-content" id="cities_list"></div>
             </div>
         </div>
         {# //============================================================= #}
-        <div class="navbar-item box" id="about"><a href="/pages/about/?menu=about">About</a></div>
-        
-        {# <div class="navbar-item box" id="test"><a href="/pages/test/?menu=test">Test</a></div> #}
+        <div class="navbar-item box has-text-centered is-clickable" id="location"><p>Location</p></div>
+        <div class="navbar-item box has-text-centered is-clickable" id="about"><p>About</p></div>
      
-            <button class="navbar-item box" id="colorMode">
+            <div class="navbar-item box is-flex is-clickable  is-justify-content-center" id="colorMode">
                 <i class="fa-regular fa-heart" id="colorModeIndicator"></i>
                 <p>Dark mode</p]>
-                </button>
+                </div>
+               
     </div>
 </nav>

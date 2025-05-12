@@ -5,13 +5,13 @@ currentURL ? null : window.location.href = "/?focus_city=waterford&day=today";
 
 (function() {
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  })();
+})();
 
 
-  document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[id^=colorMode]").forEach(indicator => {
-    indicator.addEventListener('click', ()=> {
-        const isDark = localStorage.getItem("Dark Mode") === 'true';
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[id^=colorMode]").forEach(indicator => {
+        indicator.addEventListener('click', () => {
+            const isDark = localStorage.getItem("Dark Mode") === 'true';
             localStorage.setItem("Dark Mode", !isDark);
             document.documentElement.setAttribute('data-theme', !isDark ? 'dark' : 'light');
             const colorModeIndicator = document.getElementById("colorModeIndicator");
