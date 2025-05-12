@@ -98,12 +98,16 @@
       <p class="has-text-weight-bold" style="padding-top: 0; padding-bottom: 15px;">Now:&nbsp</h1><span
           id="currentTime">time</span>
     </div>
-    <div class="is-flex is-flex-wrap-wrap" style="gap: 25px">
+    <div class="is-flex is-flex-wrap-wrap" style="gap: 13px">
       <figure class="image">
         <img id="weather_now_png" alt="weather_now" class="image is-128x128 is-1by1">
       </figure>
-      <div><span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span></div>
-      <div>
+      <div class="is-flex-direction-column" style="width: 100px">
+        <div class="is-flex-grow-1" style="justify-self: end;">
+        <span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span>
+      </div>
+      </div>
+      <div class="is-flex-grow-1" style="min-width: 200px;">
         <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
         <p>Wind:&nbsp<span id="hourly_wind_speed_10m">XXm/s</span></p>
         <p>Wind gusts:&nbsp<span id="hourly_wind_gusts_10m">XXm/s</span></p>
@@ -121,19 +125,20 @@
       <p class="has-text-weight-bold" style="padding-top: 0; padding-bottom: 15px;">Forecast for&nbsp<span
           id="chosenDayWeekday">weekday0</span>&nbsp<span id="chosenDayDate">date</span></p>
     </div>
-    <div class="is-flex is-flex-wrap-wrap" style="gap: 25px">
+    <div class="is-flex is-flex-wrap-wrap" style="gap: 13px">
       <figure class="image">
         <img id="weather_today_png" alt="weather_today" class="image is-128x128 is-1by1">
       </figure>
-      <div class="is-flex-direction-column">
-        <div>
+      <div class="is-flex-direction-column" style="width: 100px">
+        <div style="justify-self: end;">
           <span class="title has-text-weight-bold" id="daily_temperature_2m_max">XX°C</span>
         </div>
-        <div style="justify-self: end;"><span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span>
+        <div style="justify-self: end;">
+          <span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span>
         </div>
       </div>
 
-      <div style="margin-right: 20px;">
+      <div class="is-flex-grow-1" style="min-width: 200px;">
         <p>Feels like:&nbsp<span id="daily_apparent_temperature_min">XX°C</span>&nbspto&nbsp<span
             id="daily_apparent_temperature_max">XX°C</span></p>
         <p>Sunrise:&nbsp<span id="daily_sunrise">time</span></p>
