@@ -31,6 +31,25 @@ export function minToTwoChars(currentTimeMinutes) {
   }
 }
 
+// strings
+
+export function nameFix(name) {
+  name = name.toLowerCase();
+  let fixedName = "";
+  for (let i = 0; i < name.length; i++) {
+    if (name.charAt(i) === "_") {
+      fixedName += " ";
+    } else if (i === 0 || name.charAt(i - 1) === " " || name.charAt(i - 1) === "_") {
+      fixedName += name.charAt(i).toUpperCase();
+    } else {
+      fixedName += name.charAt(i);
+    }
+  }
+  return fixedName;
+}
+
+
+
 //===========================weather=============================================
 // https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTML
 /**

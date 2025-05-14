@@ -1,6 +1,6 @@
 {
-  "name": "ver_2.3_11.05.25",
-  "version": "2.3.0",
+  "name": "ver_2.4_11.05.25",
+  "version": "2.4.0",
   "description": "## Project Overview This project is a web-based application developed as part of an assessment. It includes features and functionality designed to meet the requirements of the assessment criteria.",
   "main": ".eleventy.js",
   "scripts": {

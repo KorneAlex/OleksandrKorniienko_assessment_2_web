@@ -3,6 +3,7 @@ import {
   hoursToTwoChars,
   getFocusCity,
   getDayKeyValue,
+  nameFix,
 } from "./utils.js";
 
 /**
@@ -83,7 +84,7 @@ export function citiesListDropdown(city) {
   code += `
   <div class="dropdown-item">
         <a href="/?focus_city=${city}&day=today"><p>${
-  city.charAt(0).toUpperCase() + city.slice(1)
+          nameFix(city)
 }</p></a>
   </div>`;
   return code;
@@ -235,7 +236,8 @@ export function hourlyBreakdown(city, dayFromToday) {
   let i = dayFromToday * 24;
   let j = i + 24;
   for (i; i < j; i++) {
-      if (hoursToTwoChars(i) === hoursToTwoChars(timeHoursInTheCurrentCityNow)) {
+    console.log(timeHoursInTheCurrentCityNow);
+      if (hoursToTwoChars(i) === timeHoursInTheCurrentCityNow) {
           code += `
         <figure class="image" style="border: solid; padding: 3px">
         <p class="has-text-centered">${hourlyData.hourly.time[i].slice(

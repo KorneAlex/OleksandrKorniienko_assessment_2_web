@@ -1,7 +1,8 @@
 const isDark = localStorage.getItem("Dark Mode") === 'true';
 const currentURL = window.location.search;
 
-currentURL ? null : window.location.href = "/?focus_city=waterford&day=today";
+const homeCity = (localStorage.getItem("home") != null) ? localStorage.getItem("home"):"waterford";
+currentURL ? null : window.location.href = `/?focus_city=${homeCity}&day=today`;
 
 (function() {
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');

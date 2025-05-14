@@ -85,29 +85,39 @@
 
   
 <section class="box is-0-mobile">
-  <div class="title has-text-centered">
-    <h1>The weather in&nbsp<span id="currentCityName"></span></h1>
+  <div class="title has-text-centered is-flex is-justify-content-space-between" style="position: relative">
+    <button id="home" >
+      <i id="home-city" class="fa-regular fa-house"></i>
+  </button>
+  <h1 class="is-align-content-center">The weather in&nbsp<span id="currentCityName"></span></h1>
+    <button id="heart" class="is-flex-justify-self-end" style="position: relative;">
+      <i id="fave-city" class="fa-regular fa-heart"></i>
+  </button>
+
 </section>
 
 <section class="box is-flex is-flex-direction-row is-flex-wrap-wrap" id="hero">
 
 
   
-  <article class="column" style="min-width: 300px;">
+  <article class="column">
     <div>
       <p class="has-text-weight-bold" style="padding-top: 0; padding-bottom: 15px;">Now:&nbsp</h1><span
           id="currentTime">time</span>
     </div>
-    <div class="is-flex is-flex-wrap-wrap" style="gap: 13px">
+
+    <div class="is-flex is-flex-wrap-wrap is-justify-content-space-between" style="gap: 10px">
       <figure class="image">
         <img id="weather_now_png" alt="weather_now" class="image is-128x128 is-1by1">
       </figure>
       <div class="is-flex-direction-column" style="width: 100px">
-        <div class="is-flex-grow-1" style="justify-self: end;">
+        <div style="justify-self: end;">
         <span class="title has-text-weight-bold" id="hourly_temperature_2m">XX°C</span>
       </div>
       </div>
-      <div class="is-flex-grow-1" style="min-width: 200px;">
+
+
+      <div style="width: 250px;">
         <p>Feels like:&nbsp<span id="hourly_apparent_temperature">XX</span></p>
         <p>Wind:&nbsp<span id="hourly_wind_speed_10m">XXm/s</span></p>
         <p>Wind gusts:&nbsp<span id="hourly_wind_gusts_10m">XXm/s</span></p>
@@ -120,12 +130,13 @@
 
 
   
-  <article class="column" style="min-width: 300px;">
+  <article class="column">
     <div>
       <p class="has-text-weight-bold" style="padding-top: 0; padding-bottom: 15px;">Forecast for&nbsp<span
           id="chosenDayWeekday">weekday0</span>&nbsp<span id="chosenDayDate">date</span></p>
     </div>
-    <div class="is-flex is-flex-wrap-wrap" style="gap: 13px">
+    <div class="is-flex is-flex-wrap-wrap is-justify-content-space-between" style="gap: 10px">
+    
       <figure class="image">
         <img id="weather_today_png" alt="weather_today" class="image is-128x128 is-1by1">
       </figure>
@@ -137,8 +148,10 @@
           <span class="has-text-weight-bold" id="daily_temperature_2m_min">xx°C</span>
         </div>
       </div>
+    
 
-      <div class="is-flex-grow-1" style="min-width: 200px;">
+
+      <div style="width: 250px;">
         <p>Feels like:&nbsp<span id="daily_apparent_temperature_min">XX°C</span>&nbspto&nbsp<span
             id="daily_apparent_temperature_max">XX°C</span></p>
         <p>Sunrise:&nbsp<span id="daily_sunrise">time</span></p>
