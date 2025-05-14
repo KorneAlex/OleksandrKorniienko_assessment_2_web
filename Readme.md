@@ -19,11 +19,11 @@ This project is a web-based application developed as part of an assessment. It i
 - **User-Friendly Interface**: Intuitive and easy-to-navigate UI.
 - **Custom Functionality**: Implements specific features as per the assessment requirements.
 - **User-orientated development**: Menu buttons are not links. I made them with scripts to be able to click without aiming the text.
+- **Home City** Ability to change the city on the homepage by clicking at the house icon in the city menu.
 
 ## Known bugs
 - **Jumpy menu**: When click the menu the Dark mode button updates its' state and the menu jumps.
 - **Dashoboard on the narrow display**: Very narrow display brakes the dashboard a little bit.
-- **Location services are not developed**: Default city is Waterford. Not a bug. Just lack of time.
 
 ## Technologies Used
 - HTML5
@@ -48,7 +48,7 @@ This project is a web-based application developed as part of an assessment. It i
 3. Open the project in your preferred code editor or serve it using a local development server.
 
 ## Usage
-1. Open the `index.html` file from the _site folder in your browser. Or better use 11ty.
+1. Use 11ty to run the local server.
 2. Explore the features and functionality of the application.
 3. Try to click on week tiles and hover over the Cities List and everywhere else, you might find something.
 
