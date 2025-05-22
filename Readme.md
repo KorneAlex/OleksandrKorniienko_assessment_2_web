@@ -3,6 +3,8 @@
 ## Project Overview
 This project is a web-based application developed as part of an assessment. It includes features and functionality designed to meet the requirements of the assessment criteria.
 
+link: https://wether-weather-okorniienko.netlify.app/?focus_city=cork&day=today
+
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Features](#features)
